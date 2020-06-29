@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>对象</title>
+</head>
+
+<body>
+  <script>
+    /*     基本数据类型: {
+    string
+    number
+    undefined
+    null
+    boolean
+
+    Object
+    }
+    对象 - 属于一种复合的数据类型
+    在对象中可以保存多个不同数据类型的属性
+
+    对象的分类:
+    1. 内键对象
+    - 由 ES 标准定义中的对象，在任何ES的实现中都可以使用
+    - 比如: Math String Number Boolean Function Object..
+
+    2. 宿主对象
+    - 由JS的 运行环境 提供的对象，目前主要来讲主要是由浏览器提供的对象
+    - 比如: BOM DOM ; console.log() 、 document.write()
+    3. 自定义对象
+    - 由开发人员创建的对象 
+    
+    
+    
+    */
+
+
+
+
+    // 创建对象
+    /**
+     * 使用 new 关键字调用的函数, 是构造函数 constructor
+     * 构造函数是专门来创建对象的函数
+     * 
+     * 使用 typeof 检查一个 对象时， 会返回 object 
+     */
+    var obj = new Object();
+
+    /**
+     * 在一个对象中创建的值称为属性
+     * 向对象中添加属性
+     * 语法: 对象.属性名 = 属性值
+     * 
+     */
+    // 向obj中添加一个name的属性
+    obj.name = 'duQingS'
+    console.log(obj);
+
+    /**
+     * 读取对象中的属性名
+     * 语法: 对象.属性名
+     *
+     * 如果对象当中没有该属性, 会返回 undefined
+     * 
+     * 修改
+     * 语法: 对象.属性名 = 新值
+     * 
+     * 删除
+     * 语法: delete 对象.属性名 
+    */
+
+
+    // -----------------------------------------------------------------------------------
+
+    /**
+     * 
+     * 基本数据类型
+     *  String Number Boolean undefined null 
+     * 
+     * 引用数据类型
+     * Object
+     *  
+    */
+
+    var a = 123;
+    var b = a;
+    a++;
+    // console.log(a); // 124
+    // console.log(b); // 123
+
+    var obj = new Object();
+    obj.age = 18;
+
+    var obj2 = obj;
+
+    // console.log(obj); //  { age: 18}     
+    // console.log(obj2); //  { age: 18}     
+
+    obj.age = 19;
+    // console.log(`obj`, obj2); //{ age: 19}
+
+    /**
+     * JS中的变量 都是保存在 栈内存 中 
+     *  基本数据内存的值直接在栈内存中保存
+     *  值与值之间是 独立存在, 不会互相影响
+     * 
+     * 对象是保存在堆内存中, 内存中会有一个指针指向对象,没有名字,只有地址, 
+     *  每创建一个新对象,会在堆内存中开辟一个新空间,
+     *  而变量保存的是对象的内存地址(对象的引用), 如果两个变量保存的是同一个对象的引用,
+     *  当一个通过变量修改属性时, 另外一个也会随之改变
+     * 
+    */
+    // obj2 = null; // 相当于 obj2 断开与内存的联系,不改变其他引用该内存的对象
+    // console.log(boj); // [object Object]
+    // console.log(boj2); // null
+
+    var c = 10;
+    var d = 10;
+    // console.log( c == d ); // true 
+
+    var obj3 = new Object();
+    var obj4 = new Object();
+    obj3.age = 18;
+    obj4.age = 18;
+    // console.log( obj3 == obj4 ); // false // 指向地址不一样
+
+    // 当比较两个基本数据类型时,比较值;
+    // 当比较两个引用数据类型时，比较地址
+
+
+    /**
+     * 使用 对象字面量 创建一个对象
+     * 
+     * var obj = {};
+     * 
+     * 使用对象字面量可以直接指定对象中的属性
+     * 语法: {属性名: 属性值,属性名: 属性值,属性名: 属性值}
+     * 
+     * 对象字面量的属性名引号可以加也可以不加
+     * 如果使用特殊的属性名必须加引号: "!@#$"
+     * 
+     * 属性名和属性值是一组一组的明值对结构
+     * 名和值之间使用 : 连接,多个名值之间使用 , 隔开
+     * 如果一个属性之后没有属性,就不用写
+     * 
+    */
+
+  </script>
+</body>
+
+</html>

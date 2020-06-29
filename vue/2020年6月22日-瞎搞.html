@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>瞎搞</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <style>
+    .red {
+      color: red;
+    }
+
+    .blue {
+      color: blue;
+    }
+
+    .active {
+      color: aquamarine;
+    }
+  </style>
+  <div id="app">
+    <ul>
+      <li v-for="(item,index) in arr" v-bind:class="{active:index==isactive}" @click="fn(index)">{{item}}</li>
+    </ul>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app", 
+      data: {
+        isactive: 0,
+        arr: ["健康医疗", "生活服务", "信息安全", "文化娱乐"],
+      },
+      methods: {
+        fn: function (index) {
+          //点击切换 变量的值 赋值为 index
+          console.log(index);
+          this.isactive = index;
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

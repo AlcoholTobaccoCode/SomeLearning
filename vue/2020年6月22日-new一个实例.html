@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>new一个实例</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">{{message}}</div>
+
+
+
+
+
+
+  <script>
+    // let 变量 / const 常量
+    // 编程范式: 声明式
+    const app = new Vue({
+      el: '#app', // 用于挂载要管理的 DOM对象
+      data: { // 定义数据
+        message: 'hello~',
+      }
+
+      // 元素 JS的做法
+      // 编程范式: 命令式编程
+
+    });
+  </script>
+</body>
+
+</html>

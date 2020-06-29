@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <style>
+  
+  </style>
+  <div id="app">
+    <!-- 无参数时不需要带() -->
+    <button @click="showMe1" >showMe1</button>
+    <!-- 有参数但是不带() 会打印浏览器event对象 -->
+    <button @click="showMe2" >showMe2</button>
+    <!-- 有参数时带了()但却不传值, 会导致 返回undefined -->
+    <button @click="showMe2()" >showMe2()</button>
+    <!-- 需要传参同时需要event对象: 传入 $event -->
+    <button @click="showMe3" >showMe3</button>
+    <button @click="showMe3(123, event)" >showMe3(123, event)</button> <!-- 会报错 -->
+    <button @click="showMe3(123, $event)" >showMe3(123, $event)</button>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app", 
+      data: {
+
+      },
+      methods: {
+        showMe1() {
+          console.log('showMe1');
+        },
+        showMe2(str) {
+          console.log(str);
+        },
+        showMe3(str, event) {
+          console.log(`event`, event)
+          console.log(`str`, str)
+        },
+
+      }
+    })
+  </script>
+
+</body>
+
+</html>

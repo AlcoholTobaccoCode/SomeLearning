@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MVVM</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <p>当前计数: {{number}}</p>
+    <button @click="add">+</button>
+    <button @click="less">-</button>
+  </div>
+
+
+  <script>
+    const num = {
+      number : 0
+    }
+
+    const app = new Vue({
+      el: '#app',
+      data: num,
+      methods: {
+        add() {
+          this.number++
+        },
+        less() {
+          this.number--
+        }
+      }
+
+      // 元素 JS的做法
+      // 编程范式: 命令式编程
+
+    });
+  </script>
+</body>
+
+</html>

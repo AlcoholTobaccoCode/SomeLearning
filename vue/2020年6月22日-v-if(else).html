@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-if(else)</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <style>
+  
+  </style>
+  <div id="app">
+
+    <!-- <h2 v-if="isShow">isShowTrue</h2>
+    <h2 v-else>isShowFalse</h2>
+    <button @click="isShow = !isShow">change</button> -->
+
+    <!-- <h2 v-if="source > 100">请输入满分 <b><u>100</u></b> 的分数</h2>
+    <h2 v-if="source >= 90 && source < 101">优秀</h2>
+    <h2 v-else-if="source >= 80 && source < 90">良好</h2>
+    <h2 v-else-if="source >= 60 && source < 80">及格</h2>
+    <h2 v-else="source < 60 && source < 100">不及格</h2>
+    {{source}}
+    <input type="text" v-model="source" />
+    <button @click="">change</button> -->
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app", 
+      data: {
+        isShow: true,
+        source: ''
+      },
+      methods: {
+        change() {
+          this.source = source
+        }
+
+      }
+    })
+  </script>
+
+</body>
+
+</html>

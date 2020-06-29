@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-for</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <style>
+
+  </style>
+  <div id="app">
+    <ul>
+      <li v-for="item in arrLists" :key="index">{{item}}</li>
+    </ul>
+
+    <button @click="sortFun"></button>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        arrLists: [1, 2, 3, 4, 5, 1],
+      },
+      methods: {
+        sortFun() {
+          this.arrLists.sort()
+        }
+      }
+    })
+  </script>
+
+</body>
+
+</html>

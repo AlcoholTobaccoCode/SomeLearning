@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>v-on 修饰符</title>
+  <script src="./vue.js"></script>
+</head>
+
+<body>
+  <style>
+  
+  </style>
+  <div id="app">
+    <!-- 1.  .stop  阻止冒泡修饰符 -->
+    <!-- <div @click="divClick">
+      aaaa
+      <button @click.stop="btnClick">btn</button>
+    </div> -->
+
+    <!-- 2.  .prevent  阻止默认事件 -->
+    <!-- <form action="baidu">
+      aaaa
+      <button type="submit" @click.prevent="subClick">btn</button>
+    </form> -->
+
+    <!-- 3.  .监听所有 键的点击 -->
+    <!-- <input type="text" @keyup="keyUp"> -->
+      <!-- 3.1  .监听某个 键的点击 -->
+      <!-- <input type="text" @keyup.enter="keyUp"> -->
+      <!-- 3.2  .监听自定义组件点击 -->
+      <!-- <cdn @click.native="cdnClick"></cdn> -->
+    <!-- 4.  .once 允许点击一次 -->
+
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: "#app", 
+      data: {
+
+      },
+      methods: {
+        divClick() {
+          console.log('divClick');
+        },
+        btnClick() {
+          console.log('btnClick');
+        },
+        subClick() {
+          console.log('subClick');
+        },
+        keyUp() {
+          console.log('keyUp');
+        },
+        cndClick() {
+          console.log('cndClick');
+        },
+
+      }
+    })
+  </script>
+
+</body>
+
+</html>

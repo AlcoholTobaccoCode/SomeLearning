@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数组去重</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 用类似的选择排序法的for循环体依次筛选出重复的位置,重复依次就splice(重复位置, 1)，然后在返回新数组
+     * 
+     */
+
+    var arr = [5, 5, 5, 5, 1, 1, 1, 2, 3, 4, 4, 5];
+
+    // 去除数组中重复的数字
+    // 获取数组中的每一个元素
+
+    for ( var i = 0; i < arr.length; i++ ) {
+    // console.log(`i  `, arr);
+      // 获取当前元素后的所有元素
+      /* for ( var j = i + 1; j < arr.length; j++ ) {
+        // console.log(`j  `, arr);
+        if ( arr[i] == arr[j] ) {
+          // 如果相等, 证明出现了相同的元素
+          // 删除 j 对应的元素
+          arr.splice(j ,1);
+          j--;
+        }
+      } */
+      for ( var j = arr.length - 1; j >= i + 1; j-- ) {
+        if ( arr[i] == arr[j] ) {
+          // 如果相等, 证明出现了相同的元素
+          // 删除 j 对应的元素
+          arr.splice(j ,1);
+        }
+      }
+    }
+
+    console.log(`i  `, arr);
+
+
+
+
+  </script>
+</body>
+
+</html>

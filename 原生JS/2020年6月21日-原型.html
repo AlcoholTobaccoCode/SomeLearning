@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>原型</title>
+</head>
+
+<body>
+  <script>
+    /**
+     * 原型 prototype
+     * 
+     * 我们所创建的每一个函数，解析器都会向函数中添加一个属性: prototype
+     *  这个属性对应着一个对象，这个对象就是原型对象
+     * 
+     * 如果函数作为普通函数调用，prototype 没有任何作用
+     * 
+     * 当函数通过构造函数调用时,它所创建的对象都有一个隐含的属性，
+     *  指向该构造函数的原型对象,我们可以通过 __proto__ 来访问该属性
+     * 
+     * 原型对象就相当于一个公共的区域,所有同一个类的实例都可以访问到这个原型对象
+     *  我们可以将对象中共有的内容 设置到原型对象中
+     * MyClass.prototype.a = 123;
+     * 
+     * 当我们访问对象的一个属性或方法时, 
+     * 他会现在自身中寻找，
+     * 如果有，则直接使用
+     * 如果没有,则去原型对象中寻找
+     * 
+     * 以后我们创建构造函数时，可以将这些对象共有的属性和方法，同意添加到构造函数的原型对象中，
+     * 这样不用分别为每一个对象添加，也不会影响到全局作用域,就可以使每个对象都有这样的属性和方法了
+    */
+
+    function MyClass() {
+
+    }
+    MyClass.prototype.a = 123;
+
+    // 向MyClass的原型中添加一个方法
+    MyClass.prototype.sayHello = function () {
+      // console.log('hello')
+    }
+ 
+    var mc = new MyClass();
+    var mc1 = new MyClass();
+
+    mc.a =  123111111;
+    // console.log(MyClass.prototype);
+    mc.sayHello();
+    // console.log(mc1.__proto__ == mc.__proto__); // true
+
+    // console.log(mc.a);
+    // console.log(mc1.a);
+
+
+    // *------------------------------------------------------------------
+
+    /**
+     * 创建一个构造函数
+    */
+
+    function MyClass1 () {
+
+    }
+
+    MyClass1.prototype.name = '我是原型中的名字';
+
+    var mc1 = new MyClass1();
+
+    // console.log(mc1.name);
+
+    // 使用in检查对象中是否含有某个属性时，如果对象中没有但是原型中有,也会返回 true
+    // console.log("name" in mc1); // true
+
+    // 可以使用对象的 hasOwnProperty()来检查对象自身汇总是否含有该属性
+    // 使用该方法只有当对象自身中含有属性时,才会返回 true
+    // console.log(mc1.hasOwnProperty("name")); // false
+
+    /**
+     * 原型对象也是对象，所以他也有原型
+     *  当我们要使用一盒对象的属性或方法时, 会先在自身中寻找，
+     *    自身中如果有，则直接使用
+     *    自身中如果没有，则去原型对象中寻找，如果原型对象中有，则使用
+     *    如果没有则去原型的原型中寻找 , 直到找到 Object 对象的原型
+     *    Object 对象的原型没有原型, 如果在Object中依然没有找到,则返回undefined
+     *    他的↑ 原型是 null
+    */
+
+    // console.log(mc1.__proto__.__proto__.hasOwnProperty("hasOwnProperty"));
+
+    console.log(mc1.__proto__.__proto__.__proto__); // null
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商城</title>
+    <link rel="stylesheet" href="shop.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>书籍名称</th>
+                        <th>出版日期</th>
+                        <th>价格</th>
+                        <th>购买数量</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody v-if="books.length">
+                    <tr v-for="(item, index) in books" :key="">
+                        <td>{{ index + 1 }}</td>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.date }}</td>
+                        <td>{{ item.price  | showPrice}}</td>
+                        <td>
+                            <button v-bind:disabled="item.count <= 1" @click="decrement(index)" > - </button>
+                            {{ item.count}}
+                            <button @click="increment(index)" > + </button>
+                        </td>
+                        <td><button @click="removeHandle(index)" > 移除 </button></td>
+                    </tr>
+                </tbody>
+                <tfoot v-else>
+                    <tr>
+                        <td></td>
+                        <td colspan="5" style="text-align: center;">购物车为空</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <h3>总价格：{{ totalPrice | showPrice }}</h3>
+    </div>
+
+
+    <script src="../vue.js"></script>
+    <script src="shop.js"></script>
+</body>
+
+</html>
