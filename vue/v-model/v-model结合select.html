@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 结合select </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 1. 单选 select -->
+      <!-- name 是向服务器提交时候的key -->
+      <select name="fruit" id="" v-model="fruit">
+        <option value="apple">apple</option>
+        <option value="banana">banana</option>
+        <option value="orange">orange</option>
+        <option value="durian">durian</option>
+        <option value="grape">grape</option>
+        <option value="mango">mango</option>
+        <option value="watermelon">watermelon</option>
+      </select>
+      <h2> {{ fruit }} </h2>
+
+      <!-- 2. 多选  按住ctrl / common 多选-->
+      <select style="min-height: 150px" multiple name="fruits" id="" v-model="fruits">
+        <option value="apple">apple</option>
+        <option value="banana">banana</option>
+        <option value="orange">orange</option>
+        <option value="durian">durian</option>
+        <option value="grape">grape</option>
+        <option value="mango">mango</option>
+        <option value="watermelon">watermelon</option>
+      </select>
+      <h2> {{ fruits }} </h2>
+      
+      <!-- <h2>爱好: {{ hobbies }}</h2> -->
+    </div>
+
+    <script src="../vue.js" ></script>
+    <script>
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          message: 'hello world',
+          fruit: 'banana',
+          fruits: [],
+        },
+        methods: {
+
+        }
+      });
+    </script>
+  </body>
+</html>
