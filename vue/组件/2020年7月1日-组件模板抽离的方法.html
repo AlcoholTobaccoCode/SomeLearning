@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> 组件模板抽离的方法 </title>
+</head>
+
+<body>
+  <div id="app">
+    <cpn0></cpn0>
+
+  </div>
+
+  <!-- 第一种写法：script 标签, 注意: 类型必须是 text/x-template -->
+  <!-- <script type="text/x-template" id="cpn0">
+    <div>
+      <h2> text/x-template </h2>
+      <p> content </p>
+    </div>
+  </script> -->
+
+  <!-- 第二种写法: template 标签 -->
+  <template id="cpn0">
+    <div>
+      <h2> template </h2>
+      <p> content </p>
+    </div>
+  </template>
+
+
+  <script src="../vue.js"></script>
+  <script>
+    // 组件模板的分离写法
+
+    Vue.component('cpn0', {
+      template: '#cpn0'
+    });
+
+
+    const app = new Vue({
+      el: '#app',
+
+    });
+  </script>
+</body>
+
+</html>

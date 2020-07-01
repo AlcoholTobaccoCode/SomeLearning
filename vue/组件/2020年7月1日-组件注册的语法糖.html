@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 组件的语法糖注册方式 </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn1></cpn1>
+      <cpn2></cpn2>
+    </div>
+
+    <script src="../vue.js" ></script>
+    <script>
+      // 1. 创建组件构造器
+      /*const cpnC = Vue.extend({
+        template: `
+        <div>
+          <h2> title </h2>
+          <p> content </p>
+        </div>
+        `
+      });*/
+      // 2. 注册组件
+      // Vue.components('cpn1', cpnC);
+
+      // 1. 全局组件注册的语法糖
+      // 第一种 - 全局s
+      Vue.component('cpn1', {
+        template: `
+        <div>
+          <h2> title - 1 </h2>
+          <p> content - 2 </p>
+        </div>
+        `
+      });
+
+
+
+      const app = new Vue ({
+        el: '#app',
+        components: {
+          cpn2: {
+            template: `
+              <div>
+                <h2> title - 2 </h2>
+                <p> content - 2 </p>
+              </div>
+            `
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

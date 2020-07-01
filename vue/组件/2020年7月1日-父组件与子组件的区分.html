@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 父组件与子组件 </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- <cpn_one></cpn_one> -->
+      <cpn_two></cpn_two>
+      <!-- 在作用域中使用组件时, 必须先使用components注册 -->
+    </div>
+
+    <script src="../vue.js" ></script>
+    <script>
+      // 1. 创建第一个组件
+      const cpn1 = Vue.extend({ // 子组件
+        template: `
+          <div>
+            <h2> ”-cpn 1-“</h2>
+            <hr />
+          </div>
+        `
+      });
+
+      // 2. 创建第二个组件
+      const cpn2 = Vue.extend({ // 父组件
+        template: `
+          <div>
+            <h2> ”-cpn 2-“</h2>
+            <hr />
+            <cpn_one></cpn_one>
+          </div>
+        `,
+        // a). 在第二个组件(此处作为父组件)中注册组件 cpn1
+        components: {
+          cpn_one: cpn1
+        }
+      });
+
+      // b). 根组件
+      const app = new Vue ({
+        el: '#app',
+        components: {
+          cpn_two: cpn2
+        }
+      });
+
+      /*const app = new Vue ({
+        el: '#app',
+        components: {
+          cpn_one: cpn1,
+          cpn_two: cpn2
+        }
+      });*/
+
+
+      /**
+       * 错误用法
+       * 1. 组件使用前必须先注册;
+       * 2. 组件使用时,会现在自己的对象中寻找相对于的组件模板;若没有,则去全局寻找;
+       * 
+      */
+
+    </script>
+  </body>
+</html>
