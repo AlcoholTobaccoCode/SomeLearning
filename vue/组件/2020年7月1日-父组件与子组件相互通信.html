@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 父子组件之间的通信(props) </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <child v-bind:childmovies="movies" :childtitle="title"></child>
+      <!-- childmovies / childtitle  使用 v-bind 绑定父组件 data 中的值 -->
+      <child childtitle="title"></child>
+    </div>
+
+    <template id="child">
+      <div>
+        <ul>
+          <li v-for="item in childmovies">{{ item }}</li>
+        </ul>
+        <h2>{{childtitle}}</h2>
+      </div>
+    </template>
+
+    <script src="../vue.js" ></script>
+    <script>
+      /*
+
+        父子组件的通信
+
+          子组件是不能引用父组件或者Vue实例的数据的
+
+          但是，在开发中往往一些数据缺失需要从上层传递到下层:
+            比如在一个页面中, 我们从服务器请求到了很多的数据;
+            其中一部分数据，并非是我们整个页面的大组件来展示的,而是需要下面的子组件来展示;
+            这个时候, 并不会让子组件再次发送一个网络请求, 而是直接让大组件(父组件)将数据传递給小组件(子组件)。
+
+          如何进行父子组件间的通信呢？Vue官方提到
+            通过 props 向子组件传递数据;
+            通过 事件 向 父组件发送消息：
+            props -> 
+
+            Parent  -- pass props -->   Child -- $emit Events --> Parent
+            在下面的代码中, 将直接将Vue实例当做父组件, 并且其中包含子组件来简化代码.
+     
+      */
+
+      const child = {
+        template: '#child',
+        // props: ['childmovies', 'childtitle'],
+        /*
+          props 数据验证
+            上面我们的 props 选项是使用一个数组
+            除数组之外, 我们也可以使用对象，当需要对 props 进行类型等验证时，就需要对象写法了
+            验证都支持哪些数据类型呢:
+              String 、 Number 、 Boolean 、 Array
+              Object 、 Date 、 Function 、 Symbol
+
+          props: {
+            // 基础的类型检查 (’null‘ 匹配任何类型)
+            propA: Number,
+            // 多个可能的类型
+            propB: [String, Number],
+            // 必填的字符串
+            propC: {
+              type: String,
+              required: true
+            },
+            // 带有默认值的数字
+            propD: {
+              type: Number,
+              default: 100
+            },
+            // 带有默认值的对象
+            propE: {
+              type: Object,
+              // 对象或数组默认值必须从一个工厂函数获取
+              default: function () {
+                return { message: 'Hello' }
+              }
+            },
+            // 自定义验证函数
+            propF: {
+              validator: function(value) {
+                // 这个值必须匹配下列字符串中的一个
+                return ['success', 'warning', 'danger'].indexOf(value) !== -1
+              }
+            }
+          }
+        */
+        props: {
+          // 1. 类型限制
+          // childmovies: Array, // 要求传入类型必须是一个数组类型
+          // childtitle: String
+
+          // 2. 提供一些默认值
+            childtitle: {
+              type: String, // 要求传入值的类型
+              default: '默认值', // 未传值时的默认值
+              required: true, // 必填
+            },
+            childmovies: {
+              type: Array,
+              // default: ['1', '2'] // version: 2.5.17 以下使用不会报错
+              // 类型是一个对象或数组时, 默认值必须是一个函数
+              default () {
+                return [1, 2, 3]
+              },
+            }
+        },
+        data() {
+          return {}
+        },
+        methods: {
+
+        }
+
+      }
+
+
+
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          title: '',
+          // title: 'parent title',
+          movies: ['海王', '钢铁侠', '鹰眼', '黑寡妇']
+        },
+        methods: {
+        
+        },
+        components: {
+          child // 对象字面量 - 增强写法
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 为什么组件data必须要是函数 </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn></cpn>
+    </div>
+
+    <div id="app2">
+      <cpn2></cpn2>
+      <cpn2></cpn2>
+      <cpn2></cpn2>
+      <cpn2></cpn2>
+    </div>
+    
+    <script src="../vue.js" ></script>
+    <script>
+      /*
+        组件是一个单独功能模块的封装:
+          这个模块有属于自己的HTML模板，也应该有属于自己的数据data;
+
+        组件中 无法 访问 Vue 实例中的data;
+
+        组件中也有自己的data，该data必须是函数类型;
+          而且这个函数返回一个对象, 对象内部保存着数据;
+          如下示例:
+
+        组件中的 data 为什么必须要是个函数:
+          如示例 app2
+      
+      */
+
+      // 1. 创建组件构造器
+      /* const cpnC = Vue.extend({
+        template: `
+        <div>
+          <h2> {{ title }} </h2>
+          <p> {{ content }} </p>
+        </div>
+        `,
+        data () {
+          return {
+            title: 'abd',
+            content: 'i am content in data'
+          }
+        }
+      }); */
+
+      // 2.注册组件(全局组件) // 全局组件意味着可以在多个Vue的实力下使用
+      /* Vue.component('cpn', cpnC);
+
+      const app = new Vue ({
+        el: '#app',
+      }); */
+
+
+      // 示例2: ----------------------
+
+      const obj = {
+        now_num: 0
+      }
+
+      Vue.component('cpn2', {
+        template: `
+          <div>
+            <h2>当前计数: {{ now_num }}</h2>
+            <button @click="increment">+</button>
+            <button @click="decrement">-</button>
+          </div>
+        `,
+        // 函数形式 返回保证 数据相互影响
+        data() {
+          return {
+            now_num: 0
+          }
+        },
+        // 数据相互影响(不推荐)
+        /* data() {
+          return obj;
+        }, */
+        methods: {
+          increment() {
+            this.now_num ++;
+          },
+          decrement() {
+            this.now_num --;
+          },
+        }
+      })
+
+
+      const app2 = new Vue ({
+        el: '#app2',
+      });
+
+
+
+
+    </script>
+  </body>
+</html>
