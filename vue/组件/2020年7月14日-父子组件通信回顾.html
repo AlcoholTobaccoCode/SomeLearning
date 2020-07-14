@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 父子组件之间的通信(props) </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn :cmovies="movies" :cmessage="message"></cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <h1>{{cmessage}}</h1>
+        <h2>
+          <ul>
+            <li v-for="(item, index) in cmovies" :key="index">{{index + 1}} . {{item}}</li>
+          </ul>
+        </h2>
+      </div>
+    </template>
+
+    <script src="../vue.js" ></script>
+    <script>
+      const cpn = {
+        template: '#cpn',
+        props: ['cmovies', 'cmessage'],
+        data() {
+          return {}
+        }
+      }
+
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          title: '',
+          message: 'Hello World',
+          movies: ['海王', '钢铁侠', '鹰眼', '黑寡妇']
+        },
+        components: {
+          cpn // 对象字面量 - 增强写法
+        }
+      });
+
+
+    </script>
+  </body>
+</html>

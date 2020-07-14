@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 父传子 props 中的驼峰标识 </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- <cpn :cInfo="info"></cpn>  -->
+      <!-- vue 早期版本不支持驼峰, 需要将大写改为 c-i 来使其得到数据 -->
+      <!-- 默认值 -->
+      <cpn></cpn>
+      <cpn :c-info="info" :c-is-my-text="isMyText"></cpn> 
+    </div>
+
+    <template id="cpn">
+      <div>
+        <!-- 组件中有多个标签时，必须要有一个根元素 -->
+        <h1>{{cInfo}}</h1>
+        <h2>{{cIsMyText}}</h2>
+      </div>
+    </template>
+
+    <script src="../vue.js" ></script>
+    <script>
+      const cpn = {
+        template: '#cpn',
+        data() {
+          return {}
+        },
+        props: {
+          cInfo: {
+            type: Object,
+            default() {
+              return {'default': 'default'}
+            }
+          },
+          cIsMyText: {
+            type: String,
+            default() {
+              return 'default'
+            }
+          }
+        }
+      }
+
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          info: {
+            name: 'qingShan',
+            age: 18,
+            height: 1.76
+          },
+          isMyText: '123123'
+        },
+        components: {
+          cpn // 对象字面量 - 增强写法
+        }
+      });
+
+
+    </script>
+  </body>
+</html>

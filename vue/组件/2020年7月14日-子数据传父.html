@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 子传父 </title>
+  </head>
+  <style>
+    button {
+      margin: 0 10px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <!-- 这边会默认将子组件中， 发射出来的函数所带的数据传入该(cpnCLick)函数中 -->
+      <cpn v-on:itemclick="cpnClick"></cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <button v-for="item in categories" @click="btnClick(item)" :key="item.id">{{item.name}}</button>
+      </div>
+    </template>
+
+    <script src="../vue.js" ></script>
+    <script>
+      // 子组件
+      const cpn = {
+        template: '#cpn',
+        data() {
+          return {
+            categories: [
+              {
+                id: 'aaa',
+                name: '热门推荐'
+              },
+              {
+                id: 'bbb',
+                name: '手机推荐'
+              },
+              {
+                id: 'ccc',
+                name: '家用家电'
+              },
+              {
+                id: 'ddd',
+                name: '电脑办公'
+              }
+            ]
+          }
+        },
+        methods: {
+          btnClick(item) {
+            // console.log(item);
+            // 通过自定义事件从子组件向父组件传递数据
+            // this.$emit(事件名, 数据)
+            this.$emit('itemclick', item);
+          }
+        }
+      }
+      // 父组件模板
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          message: 'Hello World',
+        },
+        components: {
+          cpn // 对象字面量 - 增强写法
+        },
+        methods: {
+          cpnClick(item) {
+            console.log(item);
+          }
+        }
+      });
+
+      /*
+          _ _ _ _ _ _ _ Pass Props _ _ _ _ _ _ 
+         |                                    |
+         |                                    |
+      Parent(父组件)                      Child(子组件)
+         |                                    |
+         |                                    |
+          _ _ _ _ _ _ _ $emit Events_ _ _ _ _ _ 
+      */
+
+    </script>
+  </body>
+</html>
