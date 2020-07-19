@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 父访问子-children-refs </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- <cpn /> 单标签后面的东西不会显示 -->
+      <cpn ref="aaa"></cpn>
+      <cpntwo ref="bbb"></cpntwo>
+      <button @click="btnClick">btn click</button>
+    </div>
+
+    <template id="cpn">
+      <div>我是子组件</div>
+    </template>
+    <template id="cpntwo">
+      <div>我是子组件1</div>
+    </template>
+
+    <script src="../vue.js" ></script>
+    <script>
+      /*
+        在父组件中拿到子组件的对象
+
+        父组件访问子组件的访问方式: $children 或 $ refs(reference - 引用)
+        子组件访问父组件的访问方式: $ parent
+      */
+      const app = new Vue ({
+        el: '#app',
+        data: {
+        
+        },
+        methods: {
+          btnClick() {
+            // 1. $children
+            // console.log(this.$children);
+            // 拿到子组件, 调用里面的方法
+            // this.$children[0].showMessage();
+            // console.log(this.$children[1].message);
+
+            // 2. $refs
+            // 对象类型 -> 默认是一个空对象
+            // 需要在父组件中引用的子组件加上 ref="xxx" 属性, 此时 ref后的值将会作为该子组件的 key
+            // console.log(this.$refs);
+            console.log(this.$refs.aaa.message);
+            console.log(this.$refs.bbb.message);
+
+          }
+        },
+        components: {
+          cpn: {
+            template: '#cpn',
+            data() {
+              return {
+                message: " I'm children"
+              }
+            },
+            methods: {
+              showMessage() {
+                console.log('show message');
+              }
+            }
+          },
+          cpntwo: {
+            template: '#cpntwo',
+            data() {
+              return {
+                message: " I'a children 1"
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
