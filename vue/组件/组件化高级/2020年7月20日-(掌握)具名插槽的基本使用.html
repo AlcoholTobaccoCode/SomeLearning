@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 具名插槽的基本使用 </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn>
+        <slot>yes</slot>
+        <button slot="left">left 具名插槽</button>
+      </cpn>
+      <cpn>
+        <h1 slot="center">标题</h1>
+      </cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <slot name="left">
+          <span>左边</span>
+        </slot>
+        <slot name="center">
+          <span>中间</span>
+        </slot>
+        <slot name="right">
+          <span>右边</span>
+        </slot>
+        <slot>no</slot>
+      </div>
+    </template>
+ 
+
+    <script src="../../vue.js" ></script>
+    <script>
+      /*
+     用插槽中的元素替换默认值
+
+      */
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          message: 'Hello QingShan!'
+        },
+        methods: {
+          btnClick() {
+            console.log('root');
+          }
+        },
+        components: {
+          cpn: {
+            template: '#cpn',
+            methods: {
+              btnClick() {
+                console.log('components');
+              }
+            }
+          }
+        }
+ 
+      });
+    </script>
+  </body>
+</html>

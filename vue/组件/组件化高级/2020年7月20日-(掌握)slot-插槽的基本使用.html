@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> slot-插槽的基本使用 </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn>
+        <button @click="btnClick">btn</button>
+      </cpn>
+
+      <cpn></cpn>
+
+      <cpn>
+        <p>i'am p</p>
+        <div>i'am div</div>
+      </cpn>
+
+      <cpn>
+        <h1>h1h1h1h1 i'm h1~!</h1>
+      </cpn>
+
+    </div>
+
+    <template id="cpn">
+      <div>
+        <h2>who?</h2>
+        <p>who i am ?</p>
+        <slot>
+          <button @click="btnClick">i'm btn</button>
+          <!-- 插槽默认值 -->
+        </slot>
+      </div>
+    </template>
+ 
+
+    <script src="../../vue.js" ></script>
+    <script>
+      /*
+      slot 翻译为插槽:
+        a). 在生活中有很多地方都有插槽, 电脑的USB插槽, 插板当中的电源插槽。
+        b). 插槽的目的是让我们原来的设备具备更多的扩展性。
+        c). 比如电脑的USB让我们可以插入U盘、硬盘、手机、音响、键盘、鼠标等等。
+      组件的插槽:
+        a). 组件的插槽也是为了让我们封装的组件更加具有扩展性。
+        b). 让使用者可以决定组件内部的一些内容到底展示什么。
+      栗子🌰:
+        a). 移动开发中, 几乎每个页面都有导航栏。
+        b). 导航栏我们必然会封装成一个插件，比如nav-bar组件。
+        c). 一旦有了这个组件, 我们就可以在多个页面中复用了。
+      
+      但是, 每个页面的导航是一样的嘛？No. 以jd为例
+        如何去封装这类组件呢？
+          a). 他们有很多区别, 同时也有很多共性.
+          b). 如果, 我们每一个单独去封装一个组件, 显然不合适: 比如每个页面
+          都返回, 这部分内容我们就要去重复去封装.
+          c). 但是, 如果我们封装成一个, 好像也不合理: 有些左侧是菜单, 有些是返回,
+          有些中间是搜索, 有些是文字,等等。
+        如何封装合适呢？ 抽取共性 , 保留不同。
+          a). 最好的封装方式就是将共性抽取到组件中, 将不同暴露为插槽，
+          b). 一旦我们预留了插槽, 就可以让使用者根据自己的需要, 决定插槽中插入什么内容.
+          c). 是搜索框、还是文字、菜单, 根据分析, 由使用者来决定.
+      这就是为什么我们要学习组价组件中的插槽 slot  的原因
+
+      1. 插槽的基本使用
+        <solt></solt>
+      
+      2. 插槽的默认值
+      <template>
+        <solt>
+          <div></div>
+        </solt>
+      </template>
+
+      3. 插槽中有多个元素时, 会用插槽中的元素替换默认值
+
+      */
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          message: 'Hello QingShan!'
+        },
+        methods: {
+          btnClick() {
+            console.log(2);
+          }
+        },
+        components: {
+          cpn: {
+            template: '#cpn',
+            methods: {
+              btnClick() {
+                console.log(1);
+              }
+            }
+          }
+        }
+ 
+      });
+    </script>
+  </body>
+</html>

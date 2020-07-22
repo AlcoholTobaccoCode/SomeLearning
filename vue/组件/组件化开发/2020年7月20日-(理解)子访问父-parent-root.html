@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 子访问父-parent-root</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <cpn></cpn>
+    </div>
+
+    <template id="cpn">
+      <div>
+        <!-- <div>我是子组件</div>
+        <button @click="btnClick">btn</button> -->
+        <ccpn></ccpn>
+      </div>
+    </template>
+    <template id="ccpn">
+      <div>
+        <div>我是子子组件</div>
+        <button @click="btnClick">btn</button>
+      </div>
+    </template>
+
+
+    <script src="../../vue.js" ></script>
+    <script>
+      /*
+        this.$parent  --> // 得到当前父组件实例对象
+        开发中不建议使用, 会导致组件可读性变差、耦合度变高;
+
+        this.$root --> // 得到当前根组件
+      
+      */
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          message: 'Hello QingShan!'
+        },
+        methods: {
+
+        },
+        components: {
+          cpn: {
+            template: '#cpn',
+            methods: {
+              btnClick() {
+                console.log(this.$parent);
+              }
+            },
+            components: {
+              ccpn: {
+                template: '#ccpn',
+                methods: {
+                  btnClick() {
+                    console.log(this.$parent); // 访问父组件
+                    console.log(this.$root); // 访问根组件
+                    console.log(this.$root.message); // 访问根组件
+                  }
+                }
+              }
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
