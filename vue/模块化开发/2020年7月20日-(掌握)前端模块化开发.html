@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 前端模块化开发 </title>
+  </head>
+
+  <body>
+    <div id="app">
+
+    </div>
+
+    <template id="cpn">
+      <div>
+        
+      </div>
+    </template>
+ 
+
+    <script src="../../vue.js" ></script>
+    <script>
+      /**
+       * JavaScript 原始功能:
+       *  - 在网页开发的早起, js制作作为一种脚本语言, 做一些简单的表单验证或动画实现等, 那时候代码还是很少的.
+       *    - 那个时候的代码是怎么写的呢? 直接将代码写在<script>标签中即可.
+       *  - 随着 ajax 异步请求的出现, 慢慢形成了前后端分离
+       *    - 客户端需要完成的事情越来越多, 代码量也是与日俱增.
+       *    - 为了应对代码量的剧增, 我们通常会将代码组织在多个js文件中, 进行维护.
+       *    - 但是这种维护方式, 依然不能避免一些灾难性的问题。
+       *      - 比如全局变量同名的问题
+       * 
+       * 模块化开发:
+       * 
+      */
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          message: 'Hello QingShan!',
+        },
+        methods: {
+
+        },
+        components: {
+          cpn: {
+            template: '#cpn',
+            data() {
+              return {
+
+
+              }
+            },
+          }
+        }
+ 
+      });
+    </script>
+  </body>
+</html>

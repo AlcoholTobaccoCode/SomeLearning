@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 编译作用域的概念 </title>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 此处 根元素为 app , 此处isShow会在根实例中查找该属性, isShow 属于 app 实例 -->
+      <cpn v-show="isShow"></cpn>
+
+    </div>
+
+    <template id="cpn">
+      <div>
+        <h1>我是子组件</h1>
+        <p>内容</p>
+        <!-- 此处 根元素是 id 为 cpn组件 ,所以此处isShow会在改组件中查找该属性, isShow 属于 cpn组件 实例 -->
+        <button v-show="isShow">btn</button>
+      </div>
+    </template>
+ 
+
+    <script src="../../vue.js" ></script>
+    <script>
+      /*
+        -> 父组件模板的所有东西都会在父级作用域内编译；
+          子组件模板的所有东西都会在自己作用域内编译。
+      */
+      const app = new Vue ({
+        el: '#app',
+        data: {
+          message: 'Hello QingShan!',
+          isShow: true
+        },
+        methods: {
+
+        },
+        components: {
+          cpn: {
+            template: '#cpn',
+            data() {
+              return {
+                isShow: false
+              }
+            }
+          }
+        }
+ 
+      });
+    </script>
+  </body>
+</html>
