@@ -227,8 +227,11 @@
     fs.writeFile();
   ```
 
-* 第三方模块
-
 * 用户自定义模块
+  * require
+  * exports
+
+* 第三方模块
+  * s
 
 ### Node 中的模块系统
