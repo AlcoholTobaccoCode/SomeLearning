@@ -13,6 +13,12 @@
 
 const http = require('http');
 
-const server = http.server();
+const server = http.createServer();
 
-// server.
+server.on('request', (request, reponse) => {
+
+});
+
+server.listen(3000, () => {
+
+});
