@@ -6,17 +6,42 @@
   <title>Document</title>
 </head>
 <body>
-  <script src="E:/our-project/node_modules/art-template/lib/template-web.js"></script>
+  <!-- 
+    注意: 在浏览器中需要引用 lib/template-web.js 文件
+
+    强调: 模板引擎不关系你的字符串内容, 只关心自己能认识的模板标记语法, 例如: {{}}
+    {{}} 语法被称为 mustache 语法, 八字胡语法。
+   -->
+
+  <script src="../../node_modules/art-template/lib/template-web.js"></script>
   <script type="text/template" id="tpl">
-    hello {{ name }}
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+      </head>
+      <body>
+        <p>大家好, 我叫{{ name }},</p>
+        <p>我今年 {{ age }}岁了, </p>
+        <p>我来自{{ address }},</p>
+        <p>我喜欢: {{ each hobbies }} {{ $value }} {{ /each }}</p>
+      </body>
+    </html>
   </script>
   <script>
     var ret = template('tpl', {
-      name: 'Jack'
+      name: 'Coin',
+      age: 18,
+      address: '地球',
+      hobbies: ['coding', 'watch mv']
     });
     console.log(ret);
 
   </script>
+
+
 
 </body>
 </html>
