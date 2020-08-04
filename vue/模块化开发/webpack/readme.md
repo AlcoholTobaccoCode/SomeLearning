@@ -68,7 +68,18 @@
 
 ## webpack的起步
 
+* dist -> distribution(发布)
+* 文件导入
+  * 1. 使用 common.js 的模块化规范导入: const { varName, ... } = require('./..');
+  * 2. 使用 ES6 的模块化规范: import { varName, ... } from './..';
+
 ## webpack的配置
+
+* npm init 初始化项目信息;
+
+* 在终端里使用的包都是使用全局的包;
+
+* 在 package.json 中的 scripts 中定义运行脚本, 会优先使用本地的包;
 
 ## loader的使用
 
