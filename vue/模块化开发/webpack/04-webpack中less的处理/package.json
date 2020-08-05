@@ -1,0 +1,19 @@
+{
+  "name": "meet-webpack",
+  "version": "1.0.0",
+  "description": "meet webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "author": "duQingShan",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^3.6.0",
+    "less": "^3.12.2",
+    "less-loader": "^4.1.0",
+    "style-loader": "^1.2.1",
+    "webpack": "^3.6.0"
+  }
+}

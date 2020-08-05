@@ -83,6 +83,8 @@
 
 ## loader的使用
 
+* 安装 loader: npm install --save-dev css-loader/style-loader
+
 ## webpack中配置Vue
 
 ## plugin的使用

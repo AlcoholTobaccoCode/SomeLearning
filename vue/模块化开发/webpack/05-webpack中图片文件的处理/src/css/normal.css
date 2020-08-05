@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+* {
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+body {
+  /* background-color: aquamarine; */
+  background-image: url('../imgs/apple-5391076.jpg');
+}
