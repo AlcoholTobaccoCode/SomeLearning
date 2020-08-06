@@ -63,7 +63,33 @@ module.exports = {
             name: 'img/[name].[hash:8].[ext]'
           },
         }]
+      },
+      // 配置 babel
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015']
+          }
+        }
       }
     ]
+  },
+  resolve: {
+    /**
+     * alias: 别名
+     * git commit -m 'remark'
+     * git c (可以給 git commit 起个别名)
+     * 
+    */
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js'
+      /**
+       * 当我在文件中以这种方式: import Vue from 'vue' 引入文件时,
+       * 默认使用 vue.runtime.js, 配置之后 可以选择使用 vue.esm.js
+      */
+    }
   }
 }

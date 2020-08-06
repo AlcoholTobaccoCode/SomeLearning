@@ -63,6 +63,17 @@ module.exports = {
             name: 'img/[name].[hash:8].[ext]'
           },
         }]
+      },
+      // 配置 babel
+      {
+        test: /\.js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015']
+          }
+        }
       }
     ]
   }
