@@ -92,6 +92,8 @@
   <!-- 会报错: You are using the runtime-only build of Vue where the template compiler is not available. Either pre-compile the templates into render functions, or use the compiler-included build. -->
   * runtime-compiler --> 代码中, 可以有 template, 因为有 compiler 可以编辑 template;
 
+* .vue 文件推荐文件名首字母大写
+
 ## plugin的使用
 
 ## 搭建本地服务器
