@@ -36,7 +36,7 @@
     ```
 
 * Vue CLI2 初始化项目
-  * ``` vue init webpack my-project ```
+  * ` vue init webpack my-project `
 
   ```shell
     ? Project name xxx // 1. 项目名称, 不能包含大写
@@ -56,7 +56,7 @@
   ```
 
 * Vue CLI3 初始化项目
-  * ``` vue create my-project ```
+  * ` vue create my-project `
 
   ```shell
   ? Please pick a preset: (Use arrow keys) // pick: 选择, preset: 配置
@@ -90,6 +90,19 @@
   * vue-cli 3 得到设计原则是 "0 配置", 移动的配置文件根目录下的 build 和 config 等目录
   * vue-cli 3 提供了 vue ui 命令, 提供了可视化配置, 更加人性化
   * 移除了 static 文件夹, 新增了 public 文件夹, 并且 index.html 移动到 public 中
+  * 目录解释:
+
+    ```floder
+      public --> 相当于 CLI2 中的 static 目录
+      src --> 源代码, 以后就在这里写
+      .browserslistrc --> 浏览器相关支持情况
+      .gitignore --> git 忽略的文件
+      babel.config.js --> ES 语法转换
+      postcss.config.js --> css 相关转换
+    ```
+
+  * 配置在
+    * vue ui, 启动 ` vue ui `,可以启动本地服务器: GUI
 
 ## 理解 runtime-compiler 和 runtime-only
 
