@@ -214,9 +214,133 @@
     * 目前很多的网站依然采用这种模式开发.
   * 单页面富应用阶段
     * 其实 SPA 最主要的特点就是在前后端分离的基础上加了一层前端路由
-    * 也就是前端来维护一套路由规则
+    * 也就是前端来维护一套路由规则.
+  * 前端路由的核心是什么呢?
+    * 改变 URL, 但是页面不进行整体的刷新
+    * 如何实现?
+  * URL 的 hash
+    * URL 的 hash 也就是锚点(#), 本质上是改变 window.location 的 href 属性
+    * 我们可以通过直接赋值 location.hash 来改变 href, 但是页面不发生刷新.
+
+    ```js
+    > location.href // href -> hypertext reference
+    <·"http://127.0.0.1:8080/examples/urlChange/"
+    > location.hash = '/'
+    <·"/"
+    > location.href
+    <·"http://127.0.0.1:8080/examples/urlChange/#/"
+    > location.hash = '/foo'
+    <·"/foo"
+    > location.href
+    <·"http://127.0.0.1:8080/examples/urlChange/#/foo"
+    ```
+  
+  * HTML5 的 history 模式: pushState
+    * pushState
+
+    ```js
+    > location.href
+    <·"http://127.0.0.1:8080/examples"
+    > history.pushState({}, '', '/foo')
+    <·underfined
+    > location.href
+    <·"http://127.0.0.1:8080/foo"
+    > history.pushState({}, '', '/')
+    <·underfined
+    > location.href
+    <·"http://127.0.0.1:8080/"
+    ```
+
+    * go 模式
+
+    ```js
+    history.go() // 此处接着上处代码
+    > location.href
+    <·"http://127.0.0.1:8080/"
+    > history.go(-1)
+    <·underfined
+    > location.href
+    <·"http://127.0.0.1:8080/foo"
+    > history.go(-1)
+    <·underfined
+    > location.href
+    <·"http://127.0.0.1:8080/examples/urlChange/"
+    > history.go(-)
+    <·underfined
+    > location.href
+    <·"http://127.0.0.1:8080/foo"
+    /**
+    * 补充说明
+    * 上面只演示了三个方法
+    * 因为 history.back() 等价于 history.go(-1)
+    * history.forward() 则等价于 history.go(1)
+    * 这三个接口等同于浏览器界面的前进后退
+    */
+    ```
+
+  * 目前前端流行的三大框架, 都有自己的路由实现
+    * Angular 的 ngRouter
+    * React 的 ReactRuoter
+    * Vue 的 vue-router
+  * 当然, 我们的重点是 vue-router
+    * vue-router 是 Vue.js 官方的路由插件, 它和 vue.js 是深度集成的, 适合用于构建单页面应用
+    * 我们可以访问其 [官方网站](https://router.vuejs.org/zh/) 对其进行学习
+  * vue-router 基于路由和组件
+    * 路由用于设定访问路径, 将路径和组件映射起来.
+    * 在 vue-router 的单页面应用中, 页面的路径的改变就是组件的切换.
 
 * vue-router 基本使用
+  * 安装和使用 vue-router
+    * 因为我们已经学习了 webpack, 后续开发中我们主要是通过工程化的方式进行开发的
+      * 所以在后续, 我们直接使用 npm 来安装路由即可
+      * 步骤一: 安装 vue-router
+        * `npm install vue-router --save`
+      * 步骤二: 在模块化工程中使用它, 因为是一个插件, 所以可以通过 Vue.use() 来安装路由功能
+        * 第一步: __导入__ 路由对象, 并且 __调用 Vue.use(VueRouter)__
+        * 第二步: 创建 __路由实例__, 并且传入路由映射配置
+        * 第三部: 在 __Vue实例__ 中 __挂载__ 创建的 __路由实例__
+    * 使用 vue-router 的步骤:
+      * 第一步: 创建路由组件
+      * 第二步: 配置路由映射: 组件和路径映射关系
+      * 第三步: 使用路由: 通过 `<router-link>` 和 `<router-view>`
+        * `<router-link>`: 该标签是一个 vue-router 已经内置的组件, 它会被渲染成一个 `<a>` 标签
+        * `<router-view>`: 该标签会根据当前的路径, 动态渲染出不同的组件
+        * 网页的其他内容, 比如顶部的标题/导航, 或者底部的一些版权信息等会和 `<router-view>` 处于同一个等级
+        * 在路由切换时, 切换的是 `<router-view>` 挂载的组件, 其他内容不会发生改变.
+
+      ```js
+        import Vue from 'vue'
+        import VueRouter from 'vue-router'
+        Vue.use(VueRouter)
+      ```
+
+    * 路由的默认路径
+      * 我们这里还有一个不太好的实现:
+        * 默认情况下, 静茹网站的首页, 我们希望 `<router-view>` 渲染首页的内容
+        * 但是我们的实现中, 默认没有显示首页组件, 必须让用户点击才可以
+      * 如何让 __路劲__ 默认跳到  __首页__, 并且 `<router-view>` 渲染首页组件呢?
+        * 非常简单, 我们只需要多配置一个映射就可以了
+
+        ```js
+          const routes = [
+            {
+              path: '/', // '' '/' 都可
+              redirece: '/home'
+            }
+          ]
+        ```
+
+        * 配置解析
+          * 我们在 routes 中又配置了一个映射
+          * path 配置的是根路径: `/`
+          * redirect 是重定向, 也就是我们将根据根路径重定向到 `/home` 的路径下, 这样就可以得到我们想要的结果了
+
+    * `<router-link>` 标签的补充
+      * 在上面的 `<router-link>` 中, 我们只是使用了一个 <span  style="color:#ff0000"> 属性: to </span>
+      * 其他属性:
+        * <span  style="color:#ff0000"> tag: </span> tag 可以指定 `<router-link>` 之后渲染成上面组件, 比如 `<router-link to='/home' tag='button'>` 会被渲染成一个 `<button>` 元素, 而不是 `<a>`
+        * 在 `<router-link>` 中加入 `replace` 属性, 将无法返回
+        * 当前选中的 `<router-link>` 会在标签上自动加上 class 类名: `router-link-active`, 修改默认选中类名: 在属性中加入 `active-class="xxx"` (该方法只会单独修改某个), 批量改: 在 路由的 index.js 中, 添加属性: `linkActiveClass: 'acitve'`
 
 * vue-router 嵌套路由
 

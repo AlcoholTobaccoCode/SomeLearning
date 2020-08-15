@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <router-link to="/hello"> hello </router-link>
+    <router-link to="/home"> 首页 </router-link>
+    <router-link to="/about"> 关于 </router-link>
+    <router-view></router-view> <!-- 决定我们渲染出来的内容所在位置 -->
   </div>
 </template>
 
@@ -12,12 +14,5 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>

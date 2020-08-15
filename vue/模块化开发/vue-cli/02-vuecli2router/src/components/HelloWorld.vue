@@ -1,13 +1,10 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <MyInfo />
-    <!-- <h1>2131231</h1> -->
   </div>
 </template>
 
 <script>
-import MyInfo from '@/components/myInfo'
 
 export default {
   name: 'Welcome',
@@ -16,9 +13,7 @@ export default {
       msg: 'Welcome Home Sir.'
     }
   },
-  components: {
-    MyInfo
-  }
+  components: {}
 }
 </script>
 

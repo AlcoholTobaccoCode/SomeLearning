@@ -1,17 +1,16 @@
 <template>
-  <div id="app">
-    <h1>duQingShan</h1>
+  <div >
+    <h1> Home </h1>
+    <h1> Home </h1>
   </div>
 </template>
 
 <script>
 export default {
-
+  name: 'Home'
 }
 </script>
 
 <style scoped>
-  h1 {
-    color: aquamarine
-  }
+
 </style>

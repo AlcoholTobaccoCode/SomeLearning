@@ -1,21 +1,40 @@
+// 配置路由相关的信息
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Want from '@/components/Want'
+import Home from '@/components/Home'
+import About from '@/components/About'
 
-Vue.use(Router)
+// 1. 通过 Vue.use(插件), 安装插件
+Vue.use(VueRouter)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld
-    },
-    {
-      path: 'want',
-      name: 'Want',
-      component: Want
-    }
-  ]
+// 2. 创建 VueRouter 对象
+const routes = [
+  {
+    path: '',
+    // redirect 重定向
+    redirect: '/home'
+  },
+  {
+    path: '/hello',
+    name: 'HelloWorld',
+    component: HelloWorld
+  },
+  {
+    path: '/home',
+    name: 'Home',
+    component: Home
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: About
+  }
+]
+const router = new VueRouter({
+  routes, // 配置路由和组件之间的应用关系
+  mode: 'history',
+  linkActiveClass: 'active'
 })
+
+export default router
