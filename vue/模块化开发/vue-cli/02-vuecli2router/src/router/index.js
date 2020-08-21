@@ -8,7 +8,9 @@ import User from '@/components/User' */
 
 // 路由懒加载, 一个懒加载对应一个打包好的 js 文件
 const HelloWorld = () => import('@/components/HelloWorld')
-const Home = () => import('@/components/Home')
+const Home = () => import('@/components/Home/Home')
+const News = () => import('@/components/Home/News')
+const Message = () => import('@/components/Home/Message')
 const About = () => import('@/components/About')
 const User = () => import('@/components/User')
 
@@ -30,7 +32,21 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    children: [
+      {
+        path: '',
+        redirect: '/home/news'
+      },
+      {
+        path: 'news',
+        component: News
+      },
+      {
+        path: 'message',
+        component: Message
+      },
+    ]
   },
   {
     path: '/about',

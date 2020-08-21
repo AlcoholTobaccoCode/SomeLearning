@@ -413,6 +413,21 @@
 
 * vue-router 嵌套路由
 
+  * 嵌套路由是一个很常见的功能
+    * 比如在 Home 页面中, 我们希望通过 /home/news 和 /home/message 访问一些内容
+    * 一个路径映射一个组件, 访问这两个路径也会分别渲染这两个组件
+  
+  * 路径和组件的关系如下:
+  
+  ```floder
+    路径                  组件
+   /home  ------------>  Home
+      /home/news ----->  News
+      /hone/message -->  Message
+   /about ------------>  About
+      
+  ```
+
 * vue-router 参数传递
 
 * vue-router 导航守卫
