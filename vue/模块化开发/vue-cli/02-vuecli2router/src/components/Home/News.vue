@@ -9,6 +9,9 @@
 <script>
 export default {
   name: 'News'
+  /* created () {
+    document.title = 'About'
+  } */
 }
 </script>
 

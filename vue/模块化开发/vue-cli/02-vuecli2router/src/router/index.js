@@ -18,51 +18,73 @@ const User = () => import('@/components/User')
 Vue.use(VueRouter)
 
 // 2. 创建 VueRouter 对象
-const routes = [
-  {
+const routes = [{
+  path: '',
+  // redirect 重定向
+  redirect: '/hello'
+},
+{
+  path: '/hello',
+  name: 'HelloWorld',
+  meta: {
+    title: 'Hello'
+  },
+  component: HelloWorld
+},
+{
+  path: '/home',
+  name: 'Home',
+  meta: { // 嵌套路由在 meta 中找不到 title, 其 title 在 matched 的 meta 中
+    title: '首页'
+  },
+  component: Home,
+  children: [{
     path: '',
-    // redirect 重定向
-    redirect: '/hello'
+    redirect: '/home/news'
   },
   {
-    path: '/hello',
-    name: 'HelloWorld',
-    component: HelloWorld
+    path: 'news',
+    component: News
   },
   {
-    path: '/home',
-    name: 'Home',
-    component: Home,
-    children: [
-      {
-        path: '',
-        redirect: '/home/news'
-      },
-      {
-        path: 'news',
-        component: News
-      },
-      {
-        path: 'message',
-        component: Message
-      },
-    ]
-  },
-  {
-    path: '/about',
-    name: 'About',
-    component: About
-  },
-  {
-    path: '/user/:userId',
-    name: 'User',
-    component: User
+    path: 'message',
+    component: Message
   }
+  ]
+},
+{
+  path: '/about',
+  name: 'About',
+  meta: {
+    title: '关于'
+  },
+  component: About
+},
+{
+  path: '/user/:userId',
+  name: 'User',
+  meta: {
+    title: '用户'
+  },
+  component: User
+}
 ]
 const router = new VueRouter({
   routes, // 配置路由和组件之间的应用关系
   mode: 'history',
   linkActiveClass: 'active'
+})
+
+router.beforeEach((to, from, next) => {
+  /**
+   * 从 from 跳转到 to
+   * next: 下一步, 必须调用
+  */
+
+  console.log(to)
+  // console.log(from)
+  document.title = to.matched[0].meta.title
+  next()
 })
 
 export default router

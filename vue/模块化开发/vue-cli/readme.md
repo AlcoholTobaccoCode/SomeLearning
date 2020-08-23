@@ -425,11 +425,29 @@
       /home/news ----->  News
       /hone/message -->  Message
    /about ------------>  About
-      
   ```
+
+  * 嵌套路由的默认路径
 
 * vue-router 参数传递
 
+  * 传递参数主要有两种类型: params 和 query
+    * __params__ 的类型
+      * 配置路由格式: /router/:id
+      * 传递的方式: <font color="red">在 path 后面跟上对应的值</font>
+      * 传递后形成的路径: <font color="red"> /router/123, /router/abc </font>
+    * query 的类型:
+      * 配置路由格式: /router, 也就是普通配置
+      * 传递的方式: 对象中使用 <font color="red"> query 的 key 作为传递方式 </font>
+      * 传递后形成的路径: <font color="red"> /router?id=123, /router?id=abc </font>
+    * 如何使用它们呢? 也有两种方式: `<router-link>` 的方式和 JavaScript 代码方式
+  
+  * $route 和 $router 的区别
+
 * vue-router 导航守卫
+
+  * 为什么使用导航守卫
+    * 最主要的是监听从哪个路径跳转到哪个路径
+    * x
 
 * keep-alive
