@@ -4,9 +4,11 @@
     <router-link tag="button" to="/home"> 首页 </router-link>
     <router-link tag="button" to="/about"> 关于 </router-link>
     <router-link tag="button" :to="'/user/' + userId"> 用户</router-link>
-    <button @click="homeClick">首页</button>
-    <button @click="aboutClick">关于</button>
-    <router-view></router-view> <!-- 决定我们渲染出来的内容所在位置 -->
+    <!-- <button @click="homeClick">首页</button> -->
+    <!-- <button @click="aboutClick">关于</button> -->
+    <keep-alive>
+      <router-view></router-view> <!-- 决定我们渲染出来的内容所在位置 -->
+    </keep-alive>
   </div>
 </template>
 
