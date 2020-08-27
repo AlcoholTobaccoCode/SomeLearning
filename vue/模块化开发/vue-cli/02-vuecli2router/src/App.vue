@@ -39,7 +39,7 @@ export default {
         this.$router.replace('/about')
         // this.$router.push('/about')
       }
-      console.log('about')
+      // console.log('about')
     }
   }
 }

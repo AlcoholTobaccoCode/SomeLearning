@@ -4,8 +4,8 @@
     <router-link to="/home/news"> 新闻 </router-link>
     <router-link to="/home/message"> 消息 </router-link>
     <router-view></router-view>
-    <h1>{{ messages }}</h1>
-    <h2>{{ message }}</h2>
+    <!-- <h1>{{ messages }}</h1> -->
+    <!-- <h2>{{ message }}</h2> -->
     <!-- <button v-on:click='changeMes()'>change message</button> -->
   </div>
 </template>
@@ -37,34 +37,37 @@ export default {
     // document.title = 'Home'
   },
   beforeMounte () {
-    console.log('挂载前')
+    // console.log('挂载前')
   },
   mounted () {
     // this.messages = '当 template 已经挂载到 DOM 上时'
-    console.log('当 template 已经挂载到 DOM 上时')
+    // console.log('当 template 已经挂载到 DOM 上时')
   },
   beforeUpdate () {
-    console.log('更新前')
+    // console.log('更新前')
   },
   update () {
     // this.messages = '当界面发生更新时'
-    console.log('当界面发生更新时')
+    // console.log('当界面发生更新时')
   },
   beforeDestroy () {
-    console.log('销毁前')
+    // console.log('销毁前')
   },
-  destroy () {
+  destroyed () {
     console.log('销毁')
   },
   activated () {
     console.log('活跃的')
-    this.$router.push(this.path)
+    console.log()
+    if (this.$route.path !== this.path) {
+      this.$router.push(this.path)
+    }
   },
   deactivated () {
     console.log('不活跃的')
   },
   beforeRouteLeave (to, from, next) {
-    console.log(this.$router.path)
+    // console.log(this.$router.path)
     this.path = this.$route.path
     next()
   }

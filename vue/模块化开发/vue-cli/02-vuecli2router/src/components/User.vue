@@ -12,7 +12,7 @@ export default {
   name: 'User',
   computed: {
     userId () {
-      console.log(this.$route)
+      // console.log(this.$route)
       return this.$route.params.userId // para --> parameters 参数
     }
   }

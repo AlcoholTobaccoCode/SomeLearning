@@ -81,7 +81,7 @@ router.beforeEach((to, from, next) => {
    * next: 下一步, 必须调用
   */
 
-  console.log(to)
+  // console.log(to)
   // console.log(from)
   document.title = to.matched[0].meta.title
   next()
