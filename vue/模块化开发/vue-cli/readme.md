@@ -494,11 +494,41 @@
 * keep-alive
   * keep-alive 遇见 vue-router
     * keep-alive 是 Vue 内置的一个组件, 可以使被包含的组件保留状态, 或避免重新渲染:
+      * 它们有两个非常重要的属性:
+        * __include__ : 字符串(如: 组件的name, 多个组件 name 用 ',' 间隔)或正则表达, 只有匹配的组件会被缓存;
+        * __exclude__ : 字符串(如: 组件的name, 多个组件 name 用 ',' 间隔)或正则表达, 任务匹配的组件都不会被缓存;
     * router-view 也是一个组件, 如果直接被包在 keep-alive 里面, 所有路径匹配到的视图组件都会被缓存:
     * keep-alive -> activated/deactivated
       * 在首页中使用 path 属性记录离开时的路径, 在 __beforeRouterLeave__ 中记录.
   
   * vue-router-keep-alive 属性介绍
+
+## TabBar
+
+* TabBar 实现思路
+  * 1. 如果下方有一个单独的 TabBar 组件, 你如何封装
+    * 自定义 TabBar 组件, 在 App 中使用
+    * 让 TabBar 处于底部, 并设置相关的样式
+  * 2. TabBar 中显示的内容由外界决定
+    * 定义插槽
+    * flex 布局平分 Tabbar
+  * 3. 自定义 TabBarItem, 可以传入 __图片__ 和 __文字__
+    * 定义 TabBarItem, 并且定义两个插槽(slot): 图片 和 文字
+    * 給两个插槽外层包装 div, 用于设置样式
+    * 填充插槽, 实现底部 TabBar 的效果
+  * 4. 传入高亮图片
+    * 定义另外一个插槽, 插入 active-icon 的数据
+    * 定义一个变量 isActive, 通过 v-show 来决定是否显示对应的 icon
+  * 5. TabBarItem 绑定路由数据
+    * 安装路由: npm install vue-router --save
+    * 完成 router/index.js 的内容, 以及创建对应的组件
+  * 6. 点击 item 跳转到对应路由, 并且动态决定 isActive
+    * 监听 item 的点击, 通过 `this.$router.replace()` 替换路由路径
+    * 通过 `this.$route.path.indexOf(this.link) !== -1` 来判断是否是 active
+  * 7. 动态计算 active 样式
+    * 封装新的计算属性: `this.isActive ? { 'color': 'red'} : {}`
+
+## 额外
 
 * 额外
   * URL:
