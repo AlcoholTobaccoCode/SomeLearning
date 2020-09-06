@@ -1,14 +1,6 @@
 <template>
   <div id="tab-bar">
-    <div class="tab-bar-item">
-      <!-- <img src="..//assets/imgs/TabBar/1.jpg" alt=""> -->
-      <img src="../../assets/imgs/TabBar/1.jpg" alt="">
-      首页
-    </div>
-    <div class="tab-bar-item">21</div>
-    <div class="tab-bar-item">31</div>
-    <div class="tab-bar-item">41</div>
-    <div class="tab-bar-item">51</div>
+    <slot></slot>
   </div>
 </template>
 
@@ -19,7 +11,16 @@ export default {
 </script>
 
 <style scoped>
-  .tab-bar-item img {
-    width: 44px;
+  #tab-bar {
+    display: flex;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #f6f6f6;
+    border-top: 1px solid #e6e6e6;
   }
+
+
 </style>

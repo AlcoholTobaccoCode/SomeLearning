@@ -1,0 +1,65 @@
+{
+  "id": "2040896",
+  "name": "tabbar",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1306",
+      "name": "购物车空",
+      "font_class": "gouwuchekong",
+      "unicode": "e601",
+      "unicode_decimal": 58881
+    },
+    {
+      "icon_id": "689262",
+      "name": "类目 品类 分类 类别",
+      "font_class": "leimupinleifenleileibie",
+      "unicode": "e7f9",
+      "unicode_decimal": 59385
+    },
+    {
+      "icon_id": "4550493",
+      "name": "我的",
+      "font_class": "wode",
+      "unicode": "e613",
+      "unicode_decimal": 58899
+    },
+    {
+      "icon_id": "5030",
+      "name": "购物车满",
+      "font_class": "gouwucheman",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "1043314",
+      "name": " ic_tabbar_home",
+      "font_class": "tabbarhome",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "1043315",
+      "name": "ic_tabbar_home_select",
+      "font_class": "tabbarhomeselect",
+      "unicode": "e624",
+      "unicode_decimal": 58916
+    },
+    {
+      "icon_id": "8017523",
+      "name": "tabbar",
+      "font_class": "tabbar",
+      "unicode": "e6b2",
+      "unicode_decimal": 59058
+    },
+    {
+      "icon_id": "13168131",
+      "name": "05TABbar-fill",
+      "font_class": "TABbar-fill",
+      "unicode": "e729",
+      "unicode_decimal": 59177
+    }
+  ]
+}
