@@ -2,14 +2,14 @@
 
 ## 什么是 Vue CLI
 
-* 如果你只是简单写几个 Vue 的__Demo 程序__, 那么你不需要 Vue CLI.
+* 如果你只是简单写几个 Vue 的 __Demo 程序__, 那么你不需要 Vue CLI.
 
-* 如果你在__开发大型项目__, 那么你需要, 并且必然__需要使用Vue CLI__
+* 如果你在 __开发大型项目__, 那么你需要, 并且必然 __需要使用Vue CLI__
   * 使用 Vue.js 开发大型项目时, 我们需要考虑代码目录结构、项目结构和部署、热加载、代码单元测试等事情;
   * 如果每个项目都要手动完成这些工作, 那无疑效率比较低效, 所以通常我们会使用一些脚手架工具来帮助完成这些事情.
 
 * CLI 是什么意思?
-  * CLI 是Command-Line Interface, 翻译为命令行界面, 但是俗称__脚手架__;
+  * CLI 是Command-Line Interface, 翻译为命令行界面, 但是俗称 __脚手架__;
   * Vue CLI 是一个官方发布 vue.js 项目脚手架;
   * 使用 vue-cli 可以快速搭建Vue 开发环境以及对应的 webpack 配置.
 
@@ -440,8 +440,15 @@
       * 配置路由格式: /router, 也就是普通配置
       * 传递的方式: 对象中使用 <font color="red"> query 的 key 作为传递方式 </font>
       * 传递后形成的路径: <font color="red"> /router?id=123, /router?id=abc </font>
+
     * 如何使用它们呢? 也有两种方式: `<router-link>` 的方式和 JavaScript 代码方式
-  
+
+    * URL:
+      * 协议: //主机:端口/路径?查询
+      * scheme(计划): //host:port/path?query#fragment
+      * meta: 元数据(描述数据的数据)
+      * 很多语言里都有 __metaclass__, 元类: 由元类创造了类对象, 由类对象创造了实例对象
+
   * $route 和 $router 的区别
 
 * vue-router 导航守卫
@@ -531,8 +538,4 @@
 ## 额外
 
 * 额外
-  * URL:
-    * 协议: //主机:端口/路径?查询
-    * scheme(计划): //host:port/path?query#fragment
-    * meta: 元数据(描述数据的数据)
-    * 很多语言里都有 __metaclass__, 元类: 由元类创造了类对象, 由类对象创造了实例对象
+

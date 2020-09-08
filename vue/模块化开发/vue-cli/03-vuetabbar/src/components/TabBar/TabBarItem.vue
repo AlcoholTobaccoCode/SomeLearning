@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-bar-item" @click="itemClick" :class="{active: isActive}">
+  <div class="tab-bar-item" @click="itemClick" :style="activeStyle">
     <!-- <i class="iconfont icon-tabbarhomeselect"></i>
     <div class="name">首页</div> -->
     <div class="icon" v-if="!isActive"><slot name="item-icon"></slot></div>
@@ -12,11 +12,23 @@
 export default {
   name: 'TabBarItem',
   props: {
-    link: String
+    link: String,
+    activeColor: {
+      type: String,
+      default: 'pink'
+    }
   },
   data() {
     return {
-      isActive: false
+      // isActive: false
+    }
+  },
+  computed: {
+    isActive() { // 动态查找当前活跃的路由, 动态給当前导航加上高亮
+      return this.$route.path.indexOf(this.link) !== -1
+    },
+    activeStyle() {
+      return this.isActive ? {color : this.activeColor} : {}
     }
   },
   methods: {
@@ -52,8 +64,8 @@ export default {
     font-size: 2.8em;
   }
 
-  .active {
+  /* .active {
     color:pink;
-  }
+  } */
 
 </style>
