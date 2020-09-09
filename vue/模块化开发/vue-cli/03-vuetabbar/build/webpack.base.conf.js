@@ -22,10 +22,14 @@ module.exports = {
       ? config.build.assetsPublicPath
       : config.dev.assetsPublicPath
   },
-  resolve: {
+  resolve: { // 别名
     extensions: ['.js', '.vue', '.json'],
     alias: {
       '@': resolve('src'),
+      // 'assets': resolve('@/assets'), // 需要高于 2.9.4 的版本支持
+      'assets': resolve('src/assets'),
+      'components': resolve('src/components'),
+      'views': resolve('src/views'),
     }
   },
   module: {

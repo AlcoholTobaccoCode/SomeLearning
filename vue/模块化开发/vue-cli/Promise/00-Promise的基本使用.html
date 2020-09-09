@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> title </title>
+  </head>
+
+  <body>
+    <script>
+      // 1. 使用 setTimeout
+      /* setTimeout(() => {
+        console.info('hello world');
+      }, 1000); */
+      
+      // 2. Promise
+      // new Promise((resolve, reject) => {
+      //   /**
+      //    * resolve -> 解决; reject -> 拒绝
+      //    * resolve, reject 本身也是函数
+      //    * 有任何异步操作可以直接封装在 Promise 里面
+      //    * 链式编程
+      //   */
+      //   /* setTimeout(() => {
+      //     console.info('hello world');
+      //     setTimeout(() => {
+      //       console.info('duQingShan');
+      //       setTimeout(() => {
+      //         console.info('duWeiWei');
+      //       }, 1000);
+      //     }, 1000);
+      //   }, 1000); */
+
+      //   // 第一次网络请求的代码
+      //   setTimeout(() => {
+      //     resolve(); // 在 Promise 中调用该函数时, 会调用 then() 函数
+      //   }, 1000);
+      // }).then(() => { // then() -> 下一步
+      //   // 第一次网络请求的处理代码
+      //   console.info('hello world');
+      //   return new Promise((resolve, reject) => {
+      //     // 第二次网络请求的代码
+      //     setTimeout(() => {
+      //       resolve();
+      //     }, 1000);
+      //   }).then(() => {
+      //     // 第二次网络请求的处理代码
+      //     console.info('duQingShan');
+      //     return new Promise((resolve, reject) => {
+      //       // 第三次网络请求的代码
+      //       setTimeout(() => {
+      //         resolve();
+      //       }, 1000);
+      //     }).then(() => {
+      //       // 第三次网络请求的处理代码
+      //       console.info('duWeiWei');
+      //     });
+      //   });
+      // });
+
+      /**
+       * 什么情况下会用到 Promise?
+       * 一般情况下是有异步请求操作时, 使用 Promise 对这个异步操作进行封装
+       * new -> 构造函数(1. 保存了一些状态信息, 2. 执行传入的函数)
+       * new Promise((resolve, reject) => { 在这写异步代码; resolve(); }).then(() => { 在这做处理 });
+       * 在执行传入的回调函数时, 会传入俩个参数, resolve, reject, 这两者本身又是函数
+      */
+
+      new Promise((resolve, reject) => {
+        let data = 'hello world';
+        setTimeout(() => { // 网络请求
+          resolve(data); // 请求成功时, 可以将异步请求的结果传到下面的 then() 中
+          reject('error message'); // 请求失败时, 用这个方法, 可以将结果返回到下面的 catch() 中
+        }, 1000);
+      }).then((data) => {
+        // 处理
+        console.info(data);
+      }).catch( (err) => {
+
+      })/* .catch( err => {}) // 箭头函数在只有一个参数时, '()' 可以省略 */;
+
+    </script>
+  </body>
+</html>

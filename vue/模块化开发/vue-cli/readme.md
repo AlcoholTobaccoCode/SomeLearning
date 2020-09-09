@@ -537,5 +537,6 @@
 
 ## 额外
 
-* 额外
-
+* 别名
+  * 在 webpack.base.conf.js 中的 resolve 可以设置路径别名
+  * 非 `import` 导入需要在前面加上 '~', 如: 'src="~assets/.."'
