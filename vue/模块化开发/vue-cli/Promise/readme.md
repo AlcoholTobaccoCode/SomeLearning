@@ -63,3 +63,25 @@
     console.log(error);
   });
   ```
+
+### Promise 的三种状态
+
+<!-- 
+  sync: 同步
+  async: 异步
+-->
+
+* 首先, 当我们开发中有异步操纵时, 就可以給异步操作包装一个 Promise
+  * 异步操作之后会有三种状态
+
+* 我们一起来看一下这三种状态
+  * pending: 等待状态, 比如正在进行网络请求, 或者定时器没有到时间.
+  * fulfill: 满足状态, 当我们主动回调了 resolve 时, 就处于该状态, 并且会回调 .then().
+  * reject: 拒绝状态, 当我们主动回调了 reject 时, 就处于该状态, 并且会回调 .catch().
+
+### 链式调用简写
+
+* 简化版代码
+  * 如果我们希望数据直接包装成 Promise.resolve, name在 then 中可以直接返回数据
+  * 注意在 02-Promise的链式调用.html 文件中的 '2', 将 `return Promise.resolve(data)` 改成了 `return data`, 结果依然是一样的
+  * 同时, 在简写时, 可以使用 '3' 中的 `throw` 来规避异常

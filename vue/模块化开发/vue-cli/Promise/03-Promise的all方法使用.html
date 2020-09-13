@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> 03-Promise的all方法使用 </title>
+</head>
+
+<body>
+  <script>
+    let promise = Promise.all([ // all([]) 中传入的是一个可迭代对象
+      // new Promise((resolve, reject) => {
+      //   $ajax({
+      //     url: 'url',
+      //     success: function (data) {
+      //       resolve(data);
+      //     }
+      //   })
+      // }),
+      // new Promise((resolve, reject) => {
+      //   $ajax({
+      //     url: 'url',
+      //     success: function (data) {
+      //       resolve(data);
+      //     }
+      //   })
+      // })
+
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('1000');
+        }, 1000);
+      }),
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('2000');
+        }, 2000);
+      })
+    ]).then(results => { // resultes返回的是一个数组
+      console.info(results)
+      console.info(results[0])
+      console.info(results[1])
+    });
+  </script>
+</body>
+
+</html>

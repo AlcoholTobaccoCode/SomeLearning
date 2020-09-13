@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 01-Promise的另外处理形式 </title>
+  </head>
+
+  <body>
+    <script>
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('执行 .then()');
+          reject('执行 catch');
+          /* if ( data.message ==- 200.3 ) {
+            resolve();
+          } else {
+            reject();
+          } */
+        },1000);
+      }).then(data => {
+        console.log(data)
+      }, err => {
+        console.log(err)
+      });
+    </script>
+  </body>
+</html>
