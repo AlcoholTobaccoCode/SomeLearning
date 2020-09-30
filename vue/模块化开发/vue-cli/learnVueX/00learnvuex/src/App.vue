@@ -18,7 +18,7 @@
   <br />
   <button @click="addStudent">添加学生</button>
 
-  <h2> --------- App 内容: getters 相关信息 start --------- </h2>
+  <h2> --------- App 内容: getters 相关信息 start_0 --------- </h2>
   <!-- <h2>{{ $store.state.counter * $store.state.counter}}</h2> -->
   <h2>{{$store.getters.powerCounter}}</h2>
   <!-- <h2>{{ $store.getters.filterStudentAgeInStore.data }}</h2> -->
@@ -26,6 +26,15 @@
   <h2>{{ $store.getters.filterStudentAgeInStore }}</h2>
   <h2>{{ $store.getters.filterStudentAgeInStoreLength }}</h2>
   <h2>{{ $store.getters.moreAgeStu(18) }}</h2>
+
+  <h2> --------- App 内容: info 对象的内容是否是响应式的 --------- </h2>
+  <h2 style="color:red">{{ $store.state.info }}</h2>
+  <input type="text" placeholder="change info" v-model="cInfo" />
+  <br />
+  <input type="text" placeholder="change address" v-model="address" />
+  <button @click="updateInfo">改变 store.state 中 info 的内容</button>
+
+
   <h2> --------- App 内容: getters 相关信息 end --------- </h2>
 
 
@@ -36,6 +45,10 @@
 
 <script>
 import HelloWorld from '@/components/HelloWorld'
+import {
+  addCounter,
+  updateInfoInStore
+} from '@/store/mutations-types.js'
 
 export default {
   name: 'App',
@@ -48,6 +61,8 @@ export default {
       addStudentId: '',
       addStudentName: '',
       addStudentAge: '',
+      cInfo: '',
+      address: ''
     }
   },
   computed: {
@@ -58,7 +73,7 @@ export default {
   },
   methods: {
     addInApp() {
-      this.$store.commit('addCounter')
+      this.$store.commit(addCounter)
     },
     minInApp() {
       this.$store.commit('minCounter')
@@ -73,6 +88,13 @@ export default {
         age: this.addStudentAge
       }
       this.$store.commit('addStudentInStore', addStudentInfo)
+    },
+    updateInfo() {
+      let uInfo = {
+        name: this.cInfo,
+        address: this.address
+      }
+      this.$store.commit(updateInfoInStore, uInfo);
     }
   }
 }

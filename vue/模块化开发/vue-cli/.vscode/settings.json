@@ -78,5 +78,8 @@
       "wrapAttributes": false,
       "sortAttributes": false
     }
-  }
+  },
+  "cSpell.words": [
+    "devtools"
+  ]
 }

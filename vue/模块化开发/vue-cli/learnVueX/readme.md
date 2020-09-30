@@ -267,7 +267,7 @@
     * Mutation 提交风格
       * 上面的通过 __commit__ 进行提交是一种普通的提交方式
         * ` this.$store.commit(funcName) `
-      * 特殊的提交封装
+      * 特殊的提交封装: Vue 还提供了另外一种风格, 它是一个包含 type 属性的对象
 
         ```js
           this.$store.commit({
@@ -278,6 +278,72 @@
           // 传入 mutation 中, 接受的参数是一个对象: { type: 'funcName', count: 5 }
 
         ```
+
+      * Mutation 中的处理方式是将整个 commit 的对象作为 payload 使用, 所以代码没有改变, 依然如下
+
+        ```js
+          changeCount(state, payload) {
+            state.count = payload.count //* 关联上面代码示例
+          }
+        ```
+
+    * Mutation 的响应规则
+      * Vuex 的 store 是响应式的, 当 state 中的数据发生改变, Vue 组件会自动更新
+      * 这就要求我们必须遵守一些 Vuex 对应的规则:
+        * __提前__ 在 store 中初始化好所需的属性
+        * 当給 state 中的对象添加新属性时, 使用下面的方式:
+          * 方式一: 使用 Vue.set(obj, 'newProp', 123)
+          * 方式二: 用新对象給就对象重新赋值
+      * 我们来看一个例子
+        * 当我们点击更新信息时, 界面并没有发生对应改变
+      * 如何才能让它改变呢?
+        * 查看下面代码的方式一、方式二和方式三, 都可以让 state 的属性是响应式的
+
+        ```js
+          mutations: {
+            updateInfo(state, payloadd) {
+              //* 方式一:
+              Vue.set(state.info, 'height', payload.height);
+              //* 方式二:
+              state.info = { ...state.info, 'height': payload.height };
+              //* 方式三
+              Vue.delete(state.info, 'age');
+            }
+          }
+
+        ```
+
+    * Mutation 常量类型 - 代码
+
+      ```js
+        //* mutations-types.js
+        export const UPDATE_INFO = 'UPDATE_INFO'
+
+        //* store/index.js
+        import * as types from '@/store/mutations-types.js'
+
+        mutation: {
+          [types.UPDATE_INFO](state, payload) {
+            //* ...
+          }
+        }
+
+        //* xx.vue
+        <script>
+          import {UPDATE_INFO} from '@/store/mutations-types';
+
+          methods: {
+            updateInfo() {
+              this.$store.commit(UPDATE_INFO, {height: 1.88})
+            }
+          }
+        </script>
+      ```
+
+    * Mutation 同步函数
+      * 通常情况下, Vuex 要求我们 Mutation 中的方法必须是同步方法
+        * 主要的原因是当我们使用 devtools 时, 可以 devtools 可以帮助我们捕捉 mutation 的快照
+        * 但是如果是异步操作, name devtools 将不能很好的追踪这个操作什么时候会被完成
 
   * Action(针对异步操作)
   * Module

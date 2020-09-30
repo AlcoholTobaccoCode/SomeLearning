@@ -1,6 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import {
+  addCounter,
+  updateInfoInStore
+} from '@/store/mutations-types.js'
 // 1. 安装插件
 Vue.use(Vuex)
 
@@ -8,15 +12,35 @@ Vue.use(Vuex)
 const store = new Vuex.Store({ //* 里面的值是固定的
   state: { //* 状态
     counter: 1000,
-    students: [
-      {id: 110, name: 'why', age: 18},
-      {id: 111, name: 'duQingShan', age: 19},
-      {id: 112, name: 'Colin', age: 20},
-      {id: 113, name: 'LiangYue', age: 22}
-    ]
+    students: [{
+        id: 110,
+        name: 'why',
+        age: 18
+      },
+      {
+        id: 111,
+        name: 'duQingShan',
+        age: 19
+      },
+      {
+        id: 112,
+        name: 'Colin',
+        age: 20
+      },
+      {
+        id: 113,
+        name: 'LiangYue',
+        age: 22
+      }
+    ],
+    info: {
+      name: 'duQingShan',
+      age: 18,
+      height: 300
+    }
   },
   mutations: { //* 想当于组件的 methods
-    addCounter(state) {
+    [addCounter](state) {
       console.info(state)
       state.counter++
     },
@@ -29,8 +53,22 @@ const store = new Vuex.Store({ //* 里面的值是固定的
     },
     addStudentInStore(state, stuInfo) {
       state.students.push(stuInfo)
-    }
+    },
+    [updateInfoInStore](state, updateInfo) {
+      // state.info.name = updateInfo.name;
+      // state.info[address] = updateInfo.address
+      // state.info.address = updateInfo.address //* 非响应式添加
+      // Vue.set(state.info, 'address', updateInfo.address); //* 响应式添加
 
+      // 删除对象中的某一个属性
+      // delete state.info.age
+      // 响应式删除
+      // Vue.delete(state.info, 'age');
+
+      setTimeout(() => {
+        state.info.name = updateInfo.name;
+      }, 1500);
+    }
   },
   actions: {
 
@@ -54,7 +92,7 @@ const store = new Vuex.Store({ //* 里面的值是固定的
         return state.students.filter( s => s.age > moreAge)
       } */
       return moreAge => {
-        return state.students.filter( s => s.age > moreAge )
+        return state.students.filter(s => s.age > moreAge)
       }
     }
   },
