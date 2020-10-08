@@ -1,6 +1,16 @@
 
 <template>
 <div id="app">
+  <h2> --------- App 内容: modulesA 相关信息 --------- </h2>
+  <input type="text" placeholder="change info" v-model="newName" />
+  <button @click="updateModulesA">修改 modulesA 中的 name</button>
+  <h2 style="color: blue">{{ $store.state.a.name }}</h2>
+  <h2 style="color: blue">{{ $store.getters.modulesAGetters }}</h2>
+  <h2 style="color: blue">{{ $store.getters.modulesAGetters2 }}</h2>
+  <h2 style="color: blue">{{ $store.getters.modulesAGetters3 }}</h2>
+  <button @click="asyncUpdateModulesA">异步修改 modulesA 中的 name</button>
+
+
   <h1>{{ message }}</h1>
   <!-- <h2>{{ counter }}</h2> -->
   <h2> {{ $store.state.counter }} </h2>
@@ -47,7 +57,9 @@
 import HelloWorld from '@/components/HelloWorld'
 import {
   addCounter,
-  updateInfoInStore
+  updateInfoInStore,
+  aUpdateInfo,
+  updateModulesAName
 } from '@/store/mutations-types.js'
 
 export default {
@@ -62,7 +74,8 @@ export default {
       addStudentName: '',
       addStudentAge: '',
       cInfo: '',
-      address: ''
+      address: '',
+      newName: ''
     }
   },
   computed: {
@@ -92,9 +105,31 @@ export default {
     updateInfo() {
       let uInfo = {
         name: this.cInfo,
-        address: this.address
+        address: this.address,
+        success: 'success'
       }
-      this.$store.commit(updateInfoInStore, uInfo);
+      // this.$store.commit(updateInfoInStore, uInfo);
+      // this.$store.dispatch(aUpdateInfo, {
+      //   uInfo,
+      //   success: () => {
+      //     console.info('success')
+      //   }
+      // }); //* dispatch: 提交数据并调用在 Action 中的方法
+      this.$store.dispatch(aUpdateInfo, uInfo).then(res => {
+        console.info(res);
+      });
+    },
+    updateModulesA () {
+      const newName = {
+        name: this.newName
+      }
+      this.$store.commit(updateModulesAName, newName);
+    },
+    asyncUpdateModulesA() {
+      const newName = {
+        name: this.newName
+      }
+      this.$store.dispatch('aUpdateNameInModulesA', newName);
     }
   }
 }

@@ -136,10 +136,10 @@
   * 2. 将 store 对象放置在 new Vue 对象中, 这样可以保证在所有的组件中都可以使用到
   * 3. 在其他组件中使用 store 对象中保存的状态即可
     * 通过 `this.$store.state.属性` 的方式来访问状态
-    * 通过 `this.$sore.commit('mutation 中指定的方法')` 来修改状态
+    * 通过 `this.$sore.commit('mutations 中指定的方法')` 来修改状态
 
 * 注意事项:
-  * 我们通过提交 mutation 的方式, 而并非直接改变 store.state.count
+  * 我们通过提交 mutations 的方式, 而并非直接改变 store.state.count
   * 这是因为 Vuex 可以更明确的追踪状态的变化, 所以不要直接改变 store.state.count 的值
 
 ### Vuex 核心概念
@@ -154,6 +154,7 @@
         * 我们知道, 在国内有很多的信息需要被记录, 比如上学时的个人档案, 工作后的社保记录, 公积金记录等
         * 这些信息被分散在很多地方进行管理, 有一天你需要办理某个业务时(比如入户某个城市), 你会发现你需要到各个对应的工作地点去打印、盖章各种资料信息, 最后到一个地方提证明你的信息无误
         * 这种保存信息的方案, 不仅低效, 而且不方便管理, 以及日后的维护也是一个庞大的工作(需要大量的各个部门的人类维护, 当然国家目前已经在完善我们的系统了)
+
   * Getters(类似计算属性)
     * Getters 的基本使用
       * 有时候, 我们需要从 store 中获取一些 state 变异后的状态, 比如下面的 Store 中:
@@ -208,22 +209,23 @@
           }
         }
         ```
-  * Mutation(修改状态)
-    * Vuex 的 store 状态的更新唯一方式: __提胶片 Mutation__
-    * Mutation 主要包含两部分:
+  
+  * Mutations(修改状态)
+    * Vuex 的 store 状态的更新唯一方式: __提交 Mutations__
+    * Mutations 主要包含两部分:
       * 字符串的 __事件类型(type)__
       * 一个 __回调函数(handler)__, 该回调函数的第一个参数就是 state
-    * Mutation 的定义方式
+    * Mutations 的定义方式
 
       ```js
-      mutation: {
+      mutations: {
         increment(state) {
           state.count++
         }
       }
       ```
 
-    * 通过 Mutation 更新
+    * 通过 Mutations 更新
 
       ```js
         incrementInComponents: function() {
@@ -231,12 +233,12 @@
         }
       ```
 
-    * Mutation 传递参数
-      * 在通过 mutation 更新数据的时候, 有可能我们希望携带一些 __额外的参数__
-        * 参数被称为是 mutation 的载荷(Payload)
+    * Mutations 传递参数
+      * 在通过 mutations 更新数据的时候, 有可能我们希望携带一些 __额外的参数__
+        * 参数被称为是 mutations 的载荷(Payload)
 
       ```js
-        // Mutation 中的代码
+        // Mutations 中的代码
         decrement(state, n) {
           state.count -= n
         }
@@ -253,7 +255,7 @@
         * 这个时候可以再从对象中取出相关信息
 
         ```js
-          // mutation 中的方法
+          // mutations 中的方法
           changeCount(state, payload) {
             state.count = payload.count
           }
@@ -264,7 +266,7 @@
           }
         ```
 
-    * Mutation 提交风格
+    * Mutations 提交风格
       * 上面的通过 __commit__ 进行提交是一种普通的提交方式
         * ` this.$store.commit(funcName) `
       * 特殊的提交封装: Vue 还提供了另外一种风格, 它是一个包含 type 属性的对象
@@ -275,11 +277,11 @@
             count
           })
 
-          // 传入 mutation 中, 接受的参数是一个对象: { type: 'funcName', count: 5 }
+          // 传入 mutations 中, 接受的参数是一个对象: { type: 'funcName', count: 5 }
 
         ```
 
-      * Mutation 中的处理方式是将整个 commit 的对象作为 payload 使用, 所以代码没有改变, 依然如下
+      * Mutations 中的处理方式是将整个 commit 的对象作为 payload 使用, 所以代码没有改变, 依然如下
 
         ```js
           changeCount(state, payload) {
@@ -287,7 +289,7 @@
           }
         ```
 
-    * Mutation 的响应规则
+    * Mutations 的响应规则
       * Vuex 的 store 是响应式的, 当 state 中的数据发生改变, Vue 组件会自动更新
       * 这就要求我们必须遵守一些 Vuex 对应的规则:
         * __提前__ 在 store 中初始化好所需的属性
@@ -313,7 +315,7 @@
 
         ```
 
-    * Mutation 常量类型 - 代码
+    * Mutations 常量类型 - 代码
 
       ```js
         //* mutations-types.js
@@ -322,7 +324,7 @@
         //* store/index.js
         import * as types from '@/store/mutations-types.js'
 
-        mutation: {
+        mutations: {
           [types.UPDATE_INFO](state, payload) {
             //* ...
           }
@@ -340,10 +342,141 @@
         </script>
       ```
 
-    * Mutation 同步函数
-      * 通常情况下, Vuex 要求我们 Mutation 中的方法必须是同步方法
-        * 主要的原因是当我们使用 devtools 时, 可以 devtools 可以帮助我们捕捉 mutation 的快照
-        * 但是如果是异步操作, name devtools 将不能很好的追踪这个操作什么时候会被完成
+    * Mutations 同步函数
+      * 通常情况下, Vuex 要求我们 Mutations 中的方法必须是同步方法
+        * 主要的原因是当我们使用 devtools 时, 可以 devtools 可以帮助我们捕捉 mutations 的快照
+        * 但是如果是异步操作, 那么 devtools 将不能很好的追踪这个操作什么时候会被完成
 
   * Action(针对异步操作)
+  
+    * 我们强调, 不要在 Mutations 中进行异步操作
+      * 但是某些情况, 我们确实希望在 Vuex 中进行一些异步操作, 比如网络请求, 必然是异步的, 这个时候怎么处理呢?
+      * Action 类似于 Mutations, 但是是用来代替 Mutations 进行异步操作的
+
+    * Action 的基本使用代码如下:
+
+    ```js
+      updateInfo() {
+        let uInfo = {
+          name: this.cInfo,
+          address: this.address,
+          success: 'success'
+        }
+        this.$store.dispatch(aUpdateInfo, {
+          uInfo,
+          success: () => {
+            console.info('success')
+          }
+        }); //* dispatch: 提交数据并调用在 Action 中的方法
+      });
+
+      [aUpdateInfo](context, payload) { //* context --> 上下文
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            context.commit(updateInfoInStore, payload);
+            resolve(payload.success);
+          }, 1500);
+        }); //* 在 action 中
+      }
+    ```
+
   * Module
+    * 认识 Module
+      * Module 是模块的意思, 为什么在 Vuex 中我们要使用模块呢?
+        * Vue 使用单一状态树, 那么也意味着很多状态都会交給 Vuex 来管理
+        * 当应用变得非常复杂时, store 对象就有可能变得相当臃肿
+        * 为了解决这个问题, Vuex 允许我们将 store 分割成模块(Module), 而每个模块拥有自己的 state、mutations、action、getters 等
+
+    * 我们按照什么样的方式来组织模块呢?
+      * 我们来看下方的代码
+
+      ```js
+        const moduleA = {
+          state: { /* ... */ },
+          mutations: { /* ... */ },
+          actions: { /* ... */ },
+          getters: { /* ... */ }
+        }
+
+        const moduleB = {
+          state: { /* ... */ },
+          mutations: { /* ... */ },
+          actions: { /* ... */ },
+          getters: { /* ... */ }
+        }
+
+        const store = new Vuex.Store({
+          modules: {
+            a: moduleA,
+            b: moduleB
+          }
+        })
+
+        store.state.a; //* -> moduleA 的状态
+        store.state.b; //* -> moduleB 的状态
+      ```
+
+    * Module 局部状态
+      * 我们在 moduleA 中添加 state、mutations、getters
+      * mutations 和 getters 接收的第一个参数是局部状态对象
+      * __注意:__ 我们在 modules 中定义的 mutations、 getters 方法, 在调用的时候依然是通过 `this.$store` 来直接调用的
+
+    * Actions 的写法
+      * Actions的写法呢? 接收一个 context 参数对象
+        * 局部状态通过 context.state 暴露出来, 根节点状态则为 content.rootState
+
+        ```js
+          //* 示例, 对象的解构:
+          const obj = {
+            name: 'duQingShan',
+            age: 18,
+            height: 1.88
+          }
+          const {name, height, age} = obj;
+
+          const moduleA = {
+            // ...
+            actions: {
+              incrementIfOddOnRootState ({ state, commit, rootState}) { // 这三个参数是从 context 中解构出来的
+                if ((state.count + rootState.count) % 2 === 1) {
+                  commit('increment)
+                }
+              }
+            }
+          }
+        ```
+
+      * 如果 getters 中也需要使用全局的状态, 可以接收跟多的参数
+
+      ```js
+        const moduleA = {
+          // ...
+          getters: {
+            sumWithRootCount( state, getters, rootState) {
+              return state.count + rootState.count
+            }
+          }
+        }
+      ```
+
+  * 项目结构
+    * 当我们的 Vuex 帮助我们管理过多的内容时, 好的项目结构可以让我们的代码更加清晰
+
+      ```txt
+        --- index.html
+        --- main.js
+        --- api
+            --- 抽取出的 API 请求
+        --- components
+            --- APP.vue
+            --- ...
+        --- store
+            --- index.js //# 我们组装模块并导出的地方
+            --- actions.js //# 根级别的 actions
+            --- mutations.js //# 根级别的 mutations
+            --- modules
+            --- cart.js //# 购物车模块
+            --- products.js //# 产品模块
+      ```
+
+  *
