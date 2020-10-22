@@ -479,4 +479,56 @@
             --- products.js //# 产品模块
       ```
 
-  *
+### 网络模块封装
+
+* 选择什么网络模块?
+  * Vue 中发送网络请求有非常多的方式, name, 在开发中, 如何选择呢?
+    * 选择一: 传统的 Ajax 是基于 XMLHttpRequest(XHR)
+      * 为什么不用它呢?
+        * 配置和调用方法等非常混乱
+        * 编码看起来就非常的蛋疼
+        * 所以真是开发中很少直接使用, 而是使用 JQuery-Ajax
+    * 选择二: 在前面的学习中, 我们经常会使用 JQuery-Ajax
+      * 相对于传统的 Ajax 非常好用
+      * 为什么不选择它呢?
+        * 首先, 我们先明确一点, 在 Vue 的整个开发中, 都是不需要 JQuery了
+        * 那么, 就意味着为了方便我们进行一个网络请求, 特意引用一个 JQuery, 你觉得合理吗?
+        * JQuery 的代码 1w+ 行
+        * Vue 的代码也才 1w+ 行
+        * 完全没有必要为了用网络请求就引用这个重量级的框架
+    * 选择三: 官方在 Vue1.x 的时候, 退出了 Vue-resource
+      * Vue-resource 的体积相对于 JQuery 小很多
+      * 另外 Vue-resources 是官方退出的
+      * 为什么不选择它呢?
+        * 在 Vue2.0 后, Vue 就在 Github 的 issue 中说明了去掉 Vue-resource, 并且不再支持新的版本时, 也不会再继续更新和维护
+        * 对以后的项目开发和维护都存在很大隐患
+    * 选择四: 在说明不再继续更新和维护 Vue-resource 的同时, 作者还推荐了一个框架: axios, 为什么不用它呢?
+      * axios 有非常多的有点, 并且用起来也非常方便
+      * 稍后, 我们对它详细学习。
+
+  * 为什么选择 axios?
+    * 为什么选择 axios？
+      * 查文档去
+    * 功能特点:
+      * 在浏览器中发送 XMLHttpRequest 请求
+      * 在 node.js 中发送 http 请求
+      * 支持 Promise API
+      * 拦截请求和响应
+      * 转换请求和相应数据
+      * and so on..
+    * 补充: axios 名称的由来? 个人理解
+      * 没有具体的翻译
+      * axios: ajax i/o system
+
+### axios
+
+* axios 请求方式
+  * axios(config)
+    * 设置请求方式, header等
+  * axios.request(config)
+  * axios.get(url[, config])
+  * axios.delete(url[, config])
+  * axios.head(url[, config])
+  * axios.post(url[, data[, config]])
+  * axios.put(url[, data[, config]])
+  * axios.patch(url[, data[, config]])
