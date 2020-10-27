@@ -532,3 +532,79 @@
   * axios.post(url[, data[, config]])
   * axios.put(url[, data[, config]])
   * axios.patch(url[, data[, config]])
+
+* 发送并发请求
+  * 有时候, 我们可能需求同时发送两个请求
+    * 使用 axios.all 可以放入多个请求的数组
+
+    ```js
+      axios.all([axios({
+
+      }), axios({
+
+      })]).then(res => {
+        console.info(res);
+      });
+    ```
+
+    * axios.all([]) 返回的结果是一个数组, 使用 axios.spread 可将数组 [res1, res2] 展开为 res1, res2
+
+    ```js
+      axios.all([axios({
+
+      }), axios({
+
+      })]).then(axios.spread((res1, res2) => {
+        console.info(res1);
+        console.info(res2);
+      }));
+    ```
+
+* 全局配置
+  * 在上面的示例中, 我们的 BaseURL 是固定的
+    * 事实上, 在开发中可能很多参数都是固定的
+    * 这个时候我们可以进行一些抽取, 也可以利用 axios 的全局配置
+
+    ```js
+      //* 全局配置示例
+      axios.defaults.baseURL = '192.168.xxx.xxx:8000';
+      axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+      //* 单独配置示例
+      axios({
+        baseURL: 'xx',
+        timeout: 5000,
+        url: 'xx',
+        //* ...
+      });
+    ```
+
+* 常见的配置选项
+  * 请求地址
+    * `url: 'user',`
+  * 请求类型
+    * `method: 'get',`
+  * 请求根路径
+    * `baseURL: 'http://www.mt.com/api',`
+  * 请求前的数据处理
+    * `transformRequest: [function(data) {}],`
+  * 请求后的数据处理
+    * `transformResponse: [function(data) {}],`
+  * 自定义的请求头
+    * `header: {'x-Requested-With': 'XMLHttpRequest'}`
+  * URL 查询对象
+    * `params: {id: 10}`
+  * 查询对象序列化函数
+    * `paramsSerializer: function(params){},`
+  * request body
+    * `data: {key: 'aa'},`
+  * 超时设置/s
+    * `timeout: 1000,`
+  * 跨域是否带 token
+    * `withCredentials: false,`
+  * 自定义请求处理
+    * `adapter: function(resolve, reject) {},`
+  * 身份验证信息
+    * `auth: { unmae: 'xx', pws: '12'},`
+  * 响应数的据格式  json/bold/document
+    * `responseType: 'json',`
