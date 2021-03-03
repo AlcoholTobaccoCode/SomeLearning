@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import axios from 'axios'
 
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -41,7 +42,7 @@ new Vue({
 })); */
 
 //* 3. 全局配置
-axios.defaults.baseURL = 'https://api.apiopen.top/';
+/* axios.defaults.baseURL = 'https://api.apiopen.top/';
 axios.defaults.timeout = 5000;
 axios.all([axios({
   url: '/videoHomeTab'
@@ -50,4 +51,27 @@ axios.all([axios({
 })]).then(axios.spread((res1, res2) => {
   console.info(res1);
   console.info(res2);
-})); 
+})); */
+
+//* 4.创建对应的 axios 的实例
+/* const instance1 = axios.create({
+  baseURL: 'https://api.apiopen.top/',
+  timeout: 5000
+});
+
+instance1({
+  url: '/videoHomeTab'
+}).then(res => {
+  console.info(res);
+});*/
+
+//* 5.封装 request 模块
+import {instance1} from './network/request'
+
+instance1({
+  url: '/videoHomeTab'
+}, res => {
+  console.info(res);
+}, err => {
+  console.info(err);
+});
