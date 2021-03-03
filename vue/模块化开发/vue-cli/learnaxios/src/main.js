@@ -66,12 +66,38 @@ instance1({
 });*/
 
 //* 5.封装 request 模块
-import {instance1} from './network/request'
+import {instance1, instance2, instance3, instance4} from './network/request'
 
-instance1({
+/* instance1({
   url: '/videoHomeTab'
 }, res => {
   console.info(res);
 }, err => {
   console.info(err);
+}); */
+
+/* instance2({
+  url: '/videoHomeTab',
+  success (res) {
+    console.info(res);
+  },
+  failure(err) {
+    console.info(err);
+  }
+}); */
+
+/* instance3({
+  url: '/videoHomeTab',
+}).then(res => {
+  console.info(res);
+}).catch(res => {
+  console.info(res);
+}); */
+
+instance4({
+  url: '/videoHomeTab',
+}).then(res => {
+  console.info(res);
+}).catch(res => {
+  console.info(res);
 });
