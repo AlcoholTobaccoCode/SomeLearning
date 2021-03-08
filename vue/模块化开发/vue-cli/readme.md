@@ -540,3 +540,28 @@
 * 别名
   * 在 webpack.base.conf.js 中的 resolve 可以设置路径别名
   * 非 `import` 导入需要在前面加上 '~', 如: 'src="~assets/.."'
+
+## axios
+
+### 拦截器
+
+* axios 提供了拦截器, 用于我们在发送每次请求或者得到响应后, 进行对应的处理
+* 如何使用拦截器呢?
+
+``` js
+  instance.interceptors.request.use(config => {
+    console.log('来到了 request 拦截 success 中');
+    return config;
+  }, err => {
+    console.log('来到了 request 拦截 failure 中');
+    return err;
+  });
+
+  instance.interceptors.response.use(response => {
+    console.log('来到了 response 拦截 success 中');
+    return response.data;
+  }, err => {
+    console.log('来到了 response 拦截 failure 中');
+    return err;
+  });
+```

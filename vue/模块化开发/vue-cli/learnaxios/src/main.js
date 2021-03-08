@@ -66,7 +66,7 @@ instance1({
 });*/
 
 //* 5.封装 request 模块
-import {instance1, instance2, instance3, instance4} from './network/request'
+import {/* instance1, instance2, instance3,  */instance4} from './network/request'
 
 /* instance1({
   url: '/videoHomeTab'
@@ -99,5 +99,5 @@ instance4({
 }).then(res => {
   console.info(res);
 }).catch(res => {
-  console.info(res);
+  // console.info(res);
 });
