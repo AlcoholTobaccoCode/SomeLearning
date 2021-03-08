@@ -7,8 +7,9 @@
 * ES6 中一个非常重要和好用的特性就是 Promise
 
 * Promise 到底是做什么的呢?
-  * <font color="red"> __Promise 是异步编程的一种解决方案__ </font>
-
+  
+* <font color="red"> __Promise 是异步编程的一种解决方案__ </font>
+  
 * 那什么时候我们会来处理异步事件呢
   * 一种很常见的场景应该就是网络请求了
   * 我们封装一个网络请求的函数, 因为不能立即拿到结果, 所以不能像简单的 3 + 4 = 7 一样将结果返回
@@ -24,18 +25,18 @@
     * 我们需要通过 data2 取出 url3, 从服务器加载数据 data3, data3 中包含了下一个请求的 url4
     * 发送网络请求 url4, 获取最终的数据 data4
 
-    ```js
-      // 模拟上述 '回调地狱'
-      $.ajax('url1', function(data1) {
+```js
+// 模拟上述 '回调地狱'
+    $.ajax('url1', function(data1) {
         $.ajax(data1['url2'], function(data2) {
-          $.ajax(data2['url3'], function(data3) {
-            $.ajax(data3['url4'], function(data4) {
-              console.log(data4)
+            $.ajax(data2['url3'], function(data3) {
+                $.ajax(data3['url4'], function(data4) {
+                	console.log(data4)
+                })
             })
-          })
         })
-      })
-    ```
+    })
+```
 
 * 上面代码有什么问题吗
   * 正常情况下, 不会有什么问题, 可以正常运行并获取我们想要的结果
@@ -47,22 +48,22 @@
   * Promise 是对我们的异步请求做一些处理的一个 __类__
 
 ### 定时器的异步事件
-  
+
 * Promise 最基本的语法
   * 我们先来看看 Promise 最基本的语法
 
-  ```js
-  new Promise((resolve, reject) => {
-    setTimeout(function() {
-      resolve('Hello World');
-      resolve('Error Dara');
-    }, 1000);
-  }).then(data => {
-    console.log(data);
-  }).catch(error => {
-    console.log(error);
-  });
-  ```
+```js
+    new Promise((resolve, reject) => {
+        setTimeout(function() {
+        	resolve('Hello World');
+        	resolve('Error Dara');
+        }, 1000);
+    }).then(data => {
+    	console.log(data);
+    }).catch(error => {
+    	console.log(error);
+	});
+```
 
 ### Promise 的三种状态
 

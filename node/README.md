@@ -75,7 +75,7 @@
   * npm
 
 ### 1.4 预备知识
-  
+
 * HTML
 * CSS
 * JavaScript
@@ -215,17 +215,18 @@
 ## 三、Node 中的 JavaScript
 
 * ECMAScript
-  * 没有DOM、BOM
-
+  
+* 没有DOM、BOM
+  
 * 核心模块
   * Node 为 JavaScript 提供了很多服务器级别的 API, 这些 API 绝大多数都被包装到了一个具名的核心模块中.例如文件操作的`fs` 核心模块, http 服务构建的 `http` 模块, `path`路径操作模块, `os` 操作系统的系统信息模块...
   * 使用核心模块, 必须要想到这样引用
 
-  ```JavaScript
+```JavaScript
     const fs = require('fs');
     fs.readFile();
     fs.writeFile();
-  ```
+```
 
 * 用户自定义模块
   * require
@@ -247,7 +248,7 @@
 * 可以同时开启多个服务, 但一定确保不同服务占用的端口号不一致才可以;
 
 ### 4.2 Content-Type
-  
+
 * [OSChina 工具](https://tool.oschina.net/)
 * [OSTool Content-Type对照表](https://tool.oschina.net/commons)
 * 不同的资源对应的 Content-Type 是不一样的
